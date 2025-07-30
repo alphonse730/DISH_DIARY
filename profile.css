@@ -1,0 +1,123 @@
+/* Profile Background (like login page) */
+.profile-bg {
+  background: url('https://readdy.ai/api/search-image?query=A%20vibrant%20kitchen%20scene%20with%20fresh%20ingredients%20spread%20across%20a%20wooden%20countertop.%20Colorful%20vegetables%2C%20herbs%2C%20and%20spices%20arranged%20beautifully.%20A%20chef%5Cs%20hand%20is%20visible%20adding%20finishing%20touches%20to%20a%20gourmet%20dish.%20The%20lighting%20is%20warm%20and%20inviting%2C%20creating%20an%20appetizing%20atmosphere.&width=1200&height=600&seq=1&orientation=landscape') center center/cover no-repeat;
+  filter: blur(2.5px) brightness(0.93) opacity(0.42);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+/* Profile Page Styles */
+
+/* Elegant Profile Page Styles */
+.profile-section {
+  background: transparent !important;
+  padding: 70px 0 90px 0;
+  min-height: 70vh;
+}
+.profile-container {
+  max-width: 420px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(80, 80, 180, 0.10), 0 1.5px 8px rgba(80,80,180,0.07);
+  padding: 48px 32px 36px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.profile-container::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 180px; height: 180px;
+  background: linear-gradient(135deg, #6c63ff 0%, #4ECDC4 100%);
+  opacity: 0.08;
+  border-radius: 50%;
+  z-index: 0;
+}
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+}
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c63ff 60%, #4ECDC4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 24px rgba(108,99,255,0.13);
+  border: 4px solid #fff;
+}
+.profile-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+.profile-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.18rem;
+  padding: 12px 0 8px 0;
+  border-bottom: 1.5px solid #f0f0f0;
+  letter-spacing: 0.01em;
+}
+.profile-row span:last-child {
+  font-family: var(--font-default);
+  color: #374151;
+  font-size: 1.13rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+}
+.profile-label {
+  font-weight: 600;
+  color: #6c63ff;
+  letter-spacing: 0.03em;
+}
+.logout-btn {
+  background: linear-gradient(90deg, #6c63ff 60%, #4ECDC4 100%);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 2.5rem;
+  border-radius: 2rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(108,99,255,0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.logout-btn:hover {
+  background: linear-gradient(90deg, #4ECDC4 0%, #6c63ff 100%);
+  box-shadow: 0 4px 16px rgba(108,99,255,0.13);
+}
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 24px 8px;
+  }
+  .profile-card {
+    gap: 16px;
+  }
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
+}

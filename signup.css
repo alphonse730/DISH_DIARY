@@ -1,0 +1,282 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  background: #faf8f6;
+  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Background image matching login */
+.signup-bg {
+  background: url('https://readdy.ai/api/search-image?query=A%20vibrant%20kitchen%20scene%20with%20fresh%20ingredients%20spread%20across%20a%20wooden%20countertop.%20Colorful%20vegetables%2C%20herbs%2C%20and%20spices%20arranged%20beautifully.%20A%20chef%5Cs%20hand%20is%20visible%20adding%20finishing%20touches%20to%20a%20gourmet%20dish.%20The%20lighting%20is%20warm%20and%20inviting%2C%20creating%20an%20appetizing%20atmosphere.&width=1200&height=600&seq=1&orientation=landscape') center center/cover no-repeat;
+  filter: blur(2.5px) brightness(0.93) opacity(0.42);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Card container */
+.signup-container {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Signup Card */
+.signup-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px 0 rgba(40,40,40,0.08);
+  padding: 2.5rem 2.2rem 2rem 2.2rem;
+  width: 370px;
+  max-width: 97vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.brand-title {
+  font-family: 'Pacifico', cursive;
+  color: #ff6b6b;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.5px;
+}
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1.3rem;
+  margin-top: 0;
+}
+
+/* User/Admin Toggle */
+.role-toggle {
+  display: flex;
+  background: #f7f7f7;
+  border-radius: 999px;
+  margin-bottom: 1.3rem;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+.role-btn {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  color: #333;
+  outline: none;
+}
+.role-btn.active {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+/* Inputs */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.05rem;
+}
+.input-group label {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #222;
+  font-weight: 600;
+}
+.input-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-icon i {
+  color: #bbb;
+  position: absolute;
+  left: 13px;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+.input-icon input {
+  width: 100%;
+  padding: 0.7rem 2.3rem 0.7rem 2.4rem;
+  border: 1.3px solid #e2e2e2;
+  border-radius: 7px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #fafbfc;
+}
+.input-icon input:focus {
+  border: 1.3px solid #ff6b6b;
+  background: #fff;
+}
+.input-icon .toggle-password,
+.input-icon .toggle-confirm-password {
+  right: 13px;
+  left: auto;
+  cursor: pointer;
+}
+
+/* Options row */
+.options-row {
+  display: flex;
+  align-items: center;
+  font-size: 0.98rem;
+  color: #666;
+  margin-bottom: 1.3rem;
+  margin-top: -0.3rem;
+}
+.remember-me {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+.remember-me input[type="checkbox"] {
+  display: none;
+}
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #eee;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 8px;
+  position: relative;
+  background: #fff;
+  transition: border 0.15s;
+}
+.remember-me input[type="checkbox"]:checked + .custom-checkbox {
+  border: 2px solid #ff6b6b;
+  background: #ff6b6b;
+}
+.remember-me input[type="checkbox"]:checked + .custom-checkbox:after {
+  content: '';
+  position: absolute;
+  left: 5px; top: 2px;
+  width: 4px; height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: block;
+}
+.remember-me a {
+  color: #ff6b6b;
+  text-decoration: none;
+  margin-left: 5px;
+  font-weight: 600;
+}
+.remember-me a:hover {
+  text-decoration: underline;
+  color: #d94d4d;
+}
+
+/* Signup button */
+.signup-btn {
+  background: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+  margin-top: 0.2rem;
+  box-shadow: 0 2px 16px 0 rgba(255,107,107,0.14);
+  transition: background 0.18s;
+}
+.signup-btn:hover {
+  background: #f14e4e;
+}
+
+/* Register Link */
+.register-link {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+}
+.register-link a {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 3px;
+  transition: color 0.15s;
+}
+.register-link a:hover {
+  color: #d94d4d;
+}
+
+/* Back to Home Button */
+.back-home-btn {
+  display: inline-block;
+  margin: 0 auto 1.2rem auto;
+  padding: 0.65rem 1.5rem;
+  background: #fff;
+  color: #ff6b6b;
+  border: 2px solid #ff6b6b;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+  box-shadow: 0 2px 10px 0 rgba(255,107,107,0.08);
+}
+.back-home-btn:hover {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .signup-card {
+    padding: 1.3rem 0.5rem 1.2rem 0.5rem;
+    width: 98vw;
+  }
+}
+
+/* Hide number input spinners if any */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 15px 20px;
+  margin: 20px auto;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.success-message a {
+  color: #0c5460;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.success-message a:hover {
+  text-decoration: underline;
+  color: #064f5c;
+}
