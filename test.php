@@ -1,4 +1,4 @@
-<!-- main.php -->
+<!-- test.php -->
 
 
 <?php

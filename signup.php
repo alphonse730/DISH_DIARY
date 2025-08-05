@@ -1,3 +1,6 @@
+<!-- signup.php -->
+
+
 <?php
 $success = "";
 $error = "";

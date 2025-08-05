@@ -34,7 +34,7 @@ $is_logged_in = isset($_SESSION['id']);
     <nav class="nav-menu" id="mainNav">
       <a href="#" class="nav-link">Home</a>
       <a href="recipes.php" class="nav-link">Recipes</a>
-      <a href="#" class="nav-link">Categories</a>
+      <a href="categories.php" class="nav-link">Categories</a>
       <a href="#" class="nav-link">Cooking tips</a>
       <a href="#" class="nav-link">About</a>
       <a href="#" class="nav-link">Contact</a>
