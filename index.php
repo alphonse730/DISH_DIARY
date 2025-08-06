@@ -20,11 +20,20 @@ $is_logged_in = isset($_SESSION['id']);
 </head>
 <body>
   <!-- Login Alert (hidden by default) -->
-  <div id="loginAlertBox" class="custom-alert" style="display:none;">
-    <span class="custom-alert-icon"><i class="ri-error-warning-line"></i></span>
-    <span>Please <a href="login.php">login</a> to access this feature!</span>
-    <span class="custom-alert-close" id="alertCloseBtn">&times;</span>
+  <!-- Login Modal -->
+<div id="loginModal" class="login-modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLoginModal()">×</button>
+    <h2>Login Required</h2>
+    <p>Please login to access this feature and explore all the amazing properties and accommodations we have to offer.</p>
+    <div class="modal-buttons">
+      <a href="login.php" class="modal-login-btn">Login Now</a>
+      <button class="modal-cancel-btn" onclick="closeLoginModal()">Cancel</button>
+    </div>
   </div>
+</div>
+
 <!-- Navigation Bar -->
 <header class="navbar">
   <div class="container nav-container">
@@ -32,7 +41,7 @@ $is_logged_in = isset($_SESSION['id']);
       <a href="#" class="brand-title">Dish Diary</a>
     </div>
     <nav class="nav-menu" id="mainNav">
-      <a href="#" class="nav-link">Home</a>
+      <a href="index.php" class="nav-link">Home</a>
       <a href="recipes.php" class="nav-link">Recipes</a>
       <a href="categories.php" class="nav-link">Categories</a>
       <a href="#" class="nav-link">Cooking tips</a>
@@ -87,51 +96,50 @@ $is_logged_in = isset($_SESSION['id']);
     </div>
     <div class="categories-grid">
       <div class="category-card">
-        <img src="https://readdy.ai/api/search-image?query=A%20beautifully%20arranged%20plate%20of%20Italian%20pasta%20with%20fresh%20tomato%20sauce%2C%20basil%20leaves%2C%20and%20parmesan%20cheese.%20The%20pasta%20is%20perfectly%20cooked%20and%20the%20sauce%20is%20rich%20and%20vibrant%20red.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=300&height=300&seq=2&orientation=squarish" alt="Italian">
-        <div class="category-overlay"><span>Italian</span></div>
+        <img src="https://media.istockphoto.com/id/1292563627/photo/assorted-south-indian-breakfast-foods-on-wooden-background-ghee-dosa-uttappam-medhu-vada.jpg?s=612x612&w=0&k=20&c=HvuYT3RiWj5YsvP2_pJrSWIcZUXhnTKqjKhdN3j_SgY=" alt="Breakfast">
+        <div class="category-overlay"><span>Breakfast</span></div>
         <div class="category-info">
-          <h3>Italian</h3>
-          <p>248 recipes</p>
+           <a href="http://localhost/DISH_DIARY/category.php?category_id=1" class="nav-link"><h3>Breakfast</h3></a>
+          
         </div>
       </div>
       <div class="category-card">
-        <img src="https://readdy.ai/api/search-image?query=A%20colorful%20Asian%20stir-fry%20dish%20with%20vibrant%20vegetables%2C%20tofu%2C%20and%20noodles.%20The%20dish%20is%20garnished%20with%20green%20onions%20and%20sesame%20seeds.%20Steam%20is%20rising%20from%20the%20hot%20food.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=300&height=300&seq=3&orientation=squarish" alt="Asian">
-        <div class="category-overlay"><span>Asian</span></div>
+        <img src="https://t3.ftcdn.net/jpg/06/53/02/64/360_F_653026495_ZmK9aF4vLIbScED62p6BlzrluL0Q9IJo.jpg">
+        <div class="category-overlay"><span>Lunch</span></div>
         <div class="category-info">
-          <h3>Asian</h3>
-          <p>186 recipes</p>
+          <h3>Lunch</h3>
+         
         </div>
       </div>
       <div class="category-card">
-        <img src="https://readdy.ai/api/search-image?query=A%20healthy%20vegetarian%20salad%20bowl%20with%20fresh%20greens%2C%20avocado%2C%20quinoa%2C%20chickpeas%2C%20and%20colorful%20vegetables.%20The%20salad%20is%20dressed%20with%20a%20light%20vinaigrette.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=300&height=300&seq=4&orientation=squarish" alt="Vegetarian">
-        <div class="category-overlay"><span>Vegetarian</span></div>
+        <img src="https://st.depositphotos.com/1006627/2011/i/450/depositphotos_20112143-stock-photo-indian-food.jpg" alt="Dinner">
+        <div class="category-overlay"><span>Dinner</span></div>
         <div class="category-info">
-          <h3>Vegetarian</h3>
-          <p>312 recipes</p>
+          <h3>Dinner</h3>
+         
         </div>
       </div>
       <div class="category-card">
-        <img src="https://readdy.ai/api/search-image?query=A%20decadent%20chocolate%20dessert%20with%20layers%20of%20cake%2C%20mousse%2C%20and%20ganache.%20The%20dessert%20is%20garnished%20with%20fresh%20berries%20and%20a%20dusting%20of%20powdered%20sugar.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=300&height=300&seq=5&orientation=squarish" alt="Desserts">
+        <img src="https://media.istockphoto.com/id/1054228718/photo/indian-sweets-in-a-plate-includes-gulab-jamun-rasgulla-kaju-katli-morichoor-bundi-laddu.jpg?s=612x612&w=0&k=20&c=hYWCXLaldKvhxdBa83M0RnUij7BCmhf-ywWdvyIXR40=" alt="Desserts">
         <div class="category-overlay"><span>Desserts</span></div>
         <div class="category-info">
           <h3>Desserts</h3>
-          <p>275 recipes</p>
         </div>
       </div>
       <div class="category-card">
-        <img src="https://readdy.ai/api/search-image?query=A%20traditional%20Mexican%20dish%20with%20colorful%20ingredients%20including%20tacos%2C%20guacamole%2C%20salsa%2C%20and%20lime.%20The%20dish%20is%20arranged%20on%20a%20rustic%20wooden%20surface.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=300&height=300&seq=6&orientation=squarish" alt="Mexican">
-        <div class="category-overlay"><span>Mexican</span></div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHMGRPQhJ6e_lQlEjZk_SD2_asAyh6__TlCQ&s" alt="Mexican">
+        <div class="category-overlay"><span>Snacks</span></div>
         <div class="category-info">
-          <h3>Mexican</h3>
-          <p>198 recipes</p>
+          <h3>Snacks</h3>
+          
         </div>
       </div>
       <div class="category-card">
-        <img src="https://readdy.ai/api/search-image?query=A%20quick%20and%20easy%20breakfast%20dish%20with%20eggs%2C%20toast%2C%20avocado%2C%20and%20fresh%20fruit.%20The%20dish%20is%20arranged%20on%20a%20white%20plate.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=300&height=300&seq=7&orientation=squarish" alt="Breakfast">
-        <div class="category-overlay"><span>Breakfast</span></div>
+        <img src="https://media.istockphoto.com/id/1253099922/photo/assortment-of-fresh-fruits-and-vegetables-juices-in-rainbow-colors.jpg?s=612x612&w=0&k=20&c=lFC0lAcR0FoPegoMTuJxc3fEAISbJVwZ1VmWNHzVEX8=" alt="Breakfast">
+        <div class="category-overlay"><span>Juices</span></div>
         <div class="category-info">
-          <h3>Breakfast</h3>
-          <p>167 recipes</p>
+          <h3>Juices</h3>
+          
         </div>
       </div>
     </div>
@@ -344,24 +352,24 @@ $is_logged_in = isset($_SESSION['id']);
     </div>
   </div>
 </footer>
-<script src="main.js"></script>
+
 <script>
+  function openLoginModal() {
+    document.getElementById("loginModal").style.display = "flex";
+  }
+  function closeLoginModal() {
+    document.getElementById("loginModal").style.display = "none";
+  }
+
   document.querySelectorAll('.nav-menu .nav-link').forEach(function(link) {
     link.addEventListener('click', function(e) {
       if (!isLoggedIn) {
         e.preventDefault();
-        var alertBox = document.getElementById('loginAlertBox');
-        alertBox.style.display = 'flex';
-        clearTimeout(window._alertTimeout);
-        window._alertTimeout = setTimeout(function() {
-          alertBox.style.display = 'none';
-        }, 4000);
+        openLoginModal();
       }
     });
   });
-  document.getElementById('alertCloseBtn').onclick = function() {
-    document.getElementById('loginAlertBox').style.display = 'none';
-  };
 </script>
+
 </body>
 </html>
