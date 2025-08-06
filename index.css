@@ -848,7 +848,7 @@ body {
   backdrop-filter: blur(8px) saturate(1.2);
   border-top: 3px solid #ffae42;
 }
-}
+
 @keyframes fadein {
   0% { opacity: 0; transform: translateY(-30px) translateX(-50%);}
   100% { opacity: 1; transform: translateY(0) translateX(-50%);}
@@ -869,7 +869,7 @@ body {
   60% { transform: scale(1.18) rotate(2deg); filter: drop-shadow(0 0 12px #ffae42); }
   100% { transform: scale(1) rotate(-2deg); filter: drop-shadow(0 0 4px #ffd1a1); }
 }
-}
+
 /* Icon attention animation */
 .animate-alert {
   animation: alert-bounce 1.2s infinite alternate;
