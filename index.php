@@ -26,7 +26,7 @@ $is_logged_in = isset($_SESSION['id']);
   <div class="modal-box">
     <button class="modal-close" onclick="closeLoginModal()">×</button>
     <h2>Login Required</h2>
-    <p>Please login to access this feature and explore all the amazing properties and accommodations we have to offer.</p>
+    <p>Please login to access this feature and explore all the delicious recipes, cooking tips, and community features we have to offer.</p>
     <div class="modal-buttons">
       <a href="login.php" class="modal-login-btn">Login Now</a>
       <button class="modal-cancel-btn" onclick="closeLoginModal()">Cancel</button>
@@ -78,13 +78,7 @@ $is_logged_in = isset($_SESSION['id']);
       <input type="text" placeholder="Search for recipes, ingredients, cuisines...">
       <button>Search</button>
     </div>
-    <div class="quick-tags">
-      <span>Quick Dinner</span>
-      <span>Vegetarian</span>
-      <span>Desserts</span>
-      <span>Healthy</span>
-      <span>Italian</span>
-    </div>
+    
   </div>
 </section>
 <!-- Categories Section -->
@@ -95,53 +89,48 @@ $is_logged_in = isset($_SESSION['id']);
       <a href="#" class="view-all">View All <i class="ri-arrow-right-line"></i></a>
     </div>
     <div class="categories-grid">
-      <div class="category-card">
+      <a href="category.php?category_id=1" class="category-card">
         <img src="https://media.istockphoto.com/id/1292563627/photo/assorted-south-indian-breakfast-foods-on-wooden-background-ghee-dosa-uttappam-medhu-vada.jpg?s=612x612&w=0&k=20&c=HvuYT3RiWj5YsvP2_pJrSWIcZUXhnTKqjKhdN3j_SgY=" alt="Breakfast">
         <div class="category-overlay"><span>Breakfast</span></div>
         <div class="category-info">
-           <a href="http://localhost/DISH_DIARY/category.php?category_id=1" class="nav-link"><h3>Breakfast</h3></a>
-          
+          <h3>Breakfast</h3>
         </div>
-      </div>
-      <div class="category-card">
-        <img src="https://t3.ftcdn.net/jpg/06/53/02/64/360_F_653026495_ZmK9aF4vLIbScED62p6BlzrluL0Q9IJo.jpg">
+      </a>
+      <a href="category.php?category_id=2" class="category-card">
+        <img src="https://t3.ftcdn.net/jpg/06/53/02/64/360_F_653026495_ZmK9aF4vLIbScED62p6BlzrluL0Q9IJo.jpg" alt="Lunch">
         <div class="category-overlay"><span>Lunch</span></div>
         <div class="category-info">
           <h3>Lunch</h3>
-         
         </div>
-      </div>
-      <div class="category-card">
+      </a>
+      <a href="category.php?category_id=3" class="category-card">
         <img src="https://st.depositphotos.com/1006627/2011/i/450/depositphotos_20112143-stock-photo-indian-food.jpg" alt="Dinner">
         <div class="category-overlay"><span>Dinner</span></div>
         <div class="category-info">
           <h3>Dinner</h3>
-         
         </div>
-      </div>
-      <div class="category-card">
+      </a>
+      <a href="category.php?category_id=5" class="category-card">
         <img src="https://media.istockphoto.com/id/1054228718/photo/indian-sweets-in-a-plate-includes-gulab-jamun-rasgulla-kaju-katli-morichoor-bundi-laddu.jpg?s=612x612&w=0&k=20&c=hYWCXLaldKvhxdBa83M0RnUij7BCmhf-ywWdvyIXR40=" alt="Desserts">
         <div class="category-overlay"><span>Desserts</span></div>
         <div class="category-info">
           <h3>Desserts</h3>
         </div>
-      </div>
-      <div class="category-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHMGRPQhJ6e_lQlEjZk_SD2_asAyh6__TlCQ&s" alt="Mexican">
+      </a>
+      <a href="category.php?category_id=4" class="category-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHMGRPQhJ6e_lQlEjZk_SD2_asAyh6__TlCQ&s" alt="Snacks">
         <div class="category-overlay"><span>Snacks</span></div>
         <div class="category-info">
           <h3>Snacks</h3>
-          
         </div>
-      </div>
-      <div class="category-card">
-        <img src="https://media.istockphoto.com/id/1253099922/photo/assortment-of-fresh-fruits-and-vegetables-juices-in-rainbow-colors.jpg?s=612x612&w=0&k=20&c=lFC0lAcR0FoPegoMTuJxc3fEAISbJVwZ1VmWNHzVEX8=" alt="Breakfast">
+      </a>
+      <a href="category.php?category_id=6" class="category-card">
+        <img src="https://media.istockphoto.com/id/1253099922/photo/assortment-of-fresh-fruits-and-vegetables-juices-in-rainbow-colors.jpg?s=612x612&w=0&k=20&c=lFC0lAcR0FoPegoMTuJxc3fEAISbJVwZ1VmWNHzVEX8=" alt="Juices">
         <div class="category-overlay"><span>Juices</span></div>
         <div class="category-info">
           <h3>Juices</h3>
-          
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -361,8 +350,17 @@ $is_logged_in = isset($_SESSION['id']);
     document.getElementById("loginModal").style.display = "none";
   }
 
+  // Restrict nav links and category cards to logged-in users
   document.querySelectorAll('.nav-menu .nav-link').forEach(function(link) {
     link.addEventListener('click', function(e) {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        openLoginModal();
+      }
+    });
+  });
+  document.querySelectorAll('.categories-grid .category-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
       if (!isLoggedIn) {
         e.preventDefault();
         openLoginModal();

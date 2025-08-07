@@ -76,9 +76,12 @@ $conn->close();
         <div class="profile-row"><span class="profile-label">Email:</span> <span><?php echo htmlspecialchars($email); ?></span></div>
         <!-- Add more fields as needed -->
       </div>
-      <form action="logout.php" method="post" style="margin-top: 2rem; width: 100%; display: flex; justify-content: center;">
-        <button type="submit" class="logout-btn">Logout</button>
-      </form>
+      <div style="margin-top: 2rem; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <a href="myrecipes.php" class="my-recipes-btn" style="display: inline-block; padding: 0.7em 2em; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #fff; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; box-shadow: 0 2px 12px #ff6b6b22; text-decoration: none; transition: background 0.2s, box-shadow 0.2s;"> <i class="ri-restaurant-2-line" style="margin-right: 8px;"></i>My Recipes</a>
+        <form action="logout.php" method="post" style="width: 100%; display: flex; justify-content: center;">
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -91,20 +94,21 @@ $conn->close();
         <a href="#" class="brand-title foot-brand">Dish Diary</a>
         <p class="footer-desc">Discover, create, and share amazing recipes with food enthusiasts around the world.</p>
         <div class="footer-socials">
-          <a href="#"><i class="ri-facebook-fill"></i></a>
-          <a href="#"><i class="ri-instagram-line"></i></a>
-          <a href="#"><i class="ri-twitter-x-line"></i></a>
-          <a href="#"><i class="ri-pinterest-line"></i></a>
+          <a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a>
+          <a href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Fedit%2F%3F__coig_login%3D1#"><i class="ri-instagram-line"></i></a>
+          <a href="https://twitter.com/"><i class="ri-twitter-x-line"></i></a>
+          <a href="https://www.pinterest.com/"><i class="ri-pinterest-line"></i></a>
         </div>
       </div>
       <div class="footer-col">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Recipes</a></li>
-          <li><a href="#">Categories</a></li>
-          <li><a href="#">Popular</a></li>
-          <li><a href="#">Latest</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="recipes.php">Recipes</a></li>
+          <li><a href="categories.php">Categories</a></li>
+          <li><a href="#">Cooking Tips</a></li>
+          
+
         </ul>
       </div>
       <div class="footer-col">
