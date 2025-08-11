@@ -1,3 +1,6 @@
+<!-- editrecipe.php -->
+
+
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
@@ -64,37 +67,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $nutrition_info = trim($_POST['nutrition_info']);
   $difficulty_id = (int)$_POST['difficulty_id'];
   $category_id = (int)$_POST['category_id'];
-  $image_url_update = $image_url;
+  $image_blob = $image_url; // Default to current image
   // Handle image upload if provided
   if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
     $tmp_name = $_FILES['image_file']['tmp_name'];
-    $name = basename($_FILES['image_file']['name']);
-    $upload_dir = __DIR__ . '/uploads/';
-    if (!is_dir($upload_dir)) {
-      mkdir($upload_dir, 0777, true);
-    }
-    $target = $upload_dir . uniqid() . '_' . $name;
-    if (move_uploaded_file($tmp_name, $target)) {
-      // Save relative path for DB and display
-      $image_url_update = 'uploads/' . basename($target);
-      $image_url = $image_url_update; // Update preview for this session
-    } else {
-      $upload_error = 'Image upload failed. Please try again.';
-    }
+    $image_blob = file_get_contents($tmp_name); // Read binary data
   }
   $stmt = $conn->prepare('UPDATE recipes SET title=?, description=?, steps=?, prep_time_min=?, cook_time_min=?, nutrition_info=?, image_url=?, difficulty_id=?, category_id=? WHERE recipe_id=? AND id=?');
   if ($stmt === false) {
     $update_error = 'Database error: ' . $conn->error;
   } else {
-    $stmt->bind_param('sssissiiiii', $title, $description, $steps, $prep_time_min, $cook_time_min, $nutrition_info, $image_url_update, $difficulty_id, $category_id, $recipe_id, $user_id);
+    $stmt->bind_param('sssissbiiii', $title, $description, $steps, $prep_time_min, $cook_time_min, $nutrition_info, $null, $difficulty_id, $category_id, $recipe_id, $user_id);
+    $null = null;
+    $stmt->send_long_data(6, $image_blob);
     if ($stmt->execute()) {
       $success = true;
+      echo "<script>console.log('✅ Recipe updated successfully'); alert('✅ Recipe updated successfully!'); window.location.href='myrecipes.php?msg=updated';</script>";
       $stmt->close();
       $conn->close();
-      header('Location: myrecipes.php?msg=updated');
       exit();
     } else {
       $update_error = 'Failed to update recipe. Please try again.';
+      echo "<script>console.error('❌ Failed to update recipe'); alert('❌ Failed to update recipe. Please try again.');</script>";
       $stmt->close();
     }
   }
@@ -192,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <div class="img-preview">
       <?php if (!empty($image_url)): ?>
-        <img src="<?= htmlspecialchars($image_url) ?>" alt="Recipe Image">
+        <img src="data:image/jpeg;base64,<?= base64_encode($image_url) ?>" alt="Recipe Image">
       <?php endif; ?>
     </div>
     <button type="submit" class="submit-btn">Save Changes</button>

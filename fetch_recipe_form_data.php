@@ -1,3 +1,5 @@
+<!-- fetch_recipe_form_data.php -->
+
 <?php
 // Fetch difficulties and categories for the recipe modal dropdowns
 $conn = new mysqli('localhost', 'root', '', 'dish_diary');
