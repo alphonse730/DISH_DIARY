@@ -8,93 +8,9 @@ if (!isset($_SESSION['id'])) {
   exit();
 }
 $user_id = $_SESSION['id'];
-
-// Get recipe_id from query string
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-  die('Invalid recipe ID.');
-}
-$recipe_id = (int)$_GET['id'];
-
-$conn = new mysqli('localhost', 'root', '', 'dish_diary');
-if ($conn->connect_error) {
-  die('Database connection failed: ' . $conn->connect_error);
-}
-
-$stmt = $conn->prepare('SELECT title, description, steps, prep_time_min, cook_time_min, nutrition_info, image_url, difficulty_id, category_id FROM recipes WHERE recipe_id = ? AND id = ?');
-$stmt->bind_param('ii', $recipe_id, $user_id);
-$stmt->execute();
-$stmt->store_result();
-if ($stmt->num_rows === 0) {
-  $stmt->close();
-  $conn->close();
-  die('Recipe not found or access denied.');
-}
-$stmt->bind_result($title, $description, $steps, $prep_time_min, $cook_time_min, $nutrition_info, $image_url, $difficulty_id, $category_id);
-$stmt->fetch();
-$stmt->close();
-
-// Fetch dropdowns
-$difficulties = [];
-$res = $conn->query('SELECT difficulty_id, level_name FROM difficultylevels');
-while ($row = $res->fetch_assoc()) {
-  $difficulties[] = $row;
-}
-$res->close();
-$categories = [];
-$res = $conn->query('SELECT category_id, category_name FROM categories');
-while ($row = $res->fetch_assoc()) {
-  $categories[] = $row;
-}
-$res->close();
-
-$upload_error = '';
-$update_error = '';
-$success = false;
-$conn->close();
-
-// Handle form submission
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $conn = new mysqli('localhost', 'root', '', 'dish_diary');
-  if ($conn->connect_error) {
-    die('Database connection failed: ' . $conn->connect_error);
-  }
-  $title = trim($_POST['title']);
-  $description = trim($_POST['description']);
-  $steps = trim($_POST['steps']);
-  $prep_time_min = (int)$_POST['prep_time_min'];
-  $cook_time_min = (int)$_POST['cook_time_min'];
-  $nutrition_info = trim($_POST['nutrition_info']);
-  $difficulty_id = (int)$_POST['difficulty_id'];
-  $category_id = (int)$_POST['category_id'];
-  $image_blob = $image_url; // Default to current image
-  // Handle image upload if provided
-  if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
-    $tmp_name = $_FILES['image_file']['tmp_name'];
-    $image_blob = file_get_contents($tmp_name); // Read binary data
-  }
-  $stmt = $conn->prepare('UPDATE recipes SET title=?, description=?, steps=?, prep_time_min=?, cook_time_min=?, nutrition_info=?, image_url=?, difficulty_id=?, category_id=? WHERE recipe_id=? AND id=?');
-  if ($stmt === false) {
-    $update_error = 'Database error: ' . $conn->error;
-  } else {
-    $stmt->bind_param('sssissbiiii', $title, $description, $steps, $prep_time_min, $cook_time_min, $nutrition_info, $null, $difficulty_id, $category_id, $recipe_id, $user_id);
-    $null = null;
-    $stmt->send_long_data(6, $image_blob);
-    if ($stmt->execute()) {
-      $success = true;
-      echo "<script>console.log('✅ Recipe updated successfully'); alert('✅ Recipe updated successfully!'); window.location.href='myrecipes.php?msg=updated';</script>";
-      $stmt->close();
-      $conn->close();
-      exit();
-    } else {
-      $update_error = 'Failed to update recipe. Please try again.';
-      echo "<script>console.error('❌ Failed to update recipe'); alert('❌ Failed to update recipe. Please try again.');</script>";
-      $stmt->close();
-    }
-  }
-  $conn->close();
-}
+// ...existing code...
 ?>
+<?php include 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>Edit Recipe - Dish Diary</title>
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="profile.css">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     .edit-recipe-container { max-width: 540px; margin: 3rem auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px #ff6b6b11; padding: 2.5rem 2.2rem 2rem; }
     .edit-recipe-title { font-family: var(--font-brand); color: var(--primary); font-size: 2rem; margin-bottom: 1.5rem; }
@@ -185,8 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div style="color: red; margin-bottom: 1em;"> <?= htmlspecialchars($update_error) ?> </div>
     <?php endif; ?>
     <div class="img-preview">
-      <?php if (!empty($image_url)): ?>
-        <img src="data:image/jpeg;base64,<?= base64_encode($image_url) ?>" alt="Recipe Image">
+      <?php if (!empty($image_url) && file_exists(__DIR__ . '/' . $image_url)): ?>
+        <img src="<?= htmlspecialchars($image_url) ?>" alt="Recipe Image">
       <?php endif; ?>
     </div>
     <button type="submit" class="submit-btn">Save Changes</button>

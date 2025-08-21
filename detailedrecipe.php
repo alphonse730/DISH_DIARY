@@ -3,19 +3,17 @@
 <?php
 // Get recipe_id from URL
 if (!isset($_GET['recipe_id']) || !is_numeric($_GET['recipe_id'])) {
-    die('Invalid recipe ID.');
+  die('Invalid recipe ID.');
 }
 $recipe_id = intval($_GET['recipe_id']);
-
 $conn = new mysqli("localhost", "root", "", "dish_diary");
 if ($conn->connect_error) {
-    die("Connection failed: " . htmlspecialchars($conn->connect_error));
+  die("Connection failed: " . htmlspecialchars($conn->connect_error));
 }
-
 $sql = "SELECT r.*, c.category_name, d.level_name, u.name AS user_name FROM recipes r LEFT JOIN categories c ON r.category_id = c.category_id LEFT JOIN difficultylevels d ON r.difficulty_id = d.difficulty_id LEFT JOIN users u ON r.id = u.id WHERE r.recipe_id = ?";
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
-    die("Query preparation failed: " . htmlspecialchars($conn->error));
+  die("Query preparation failed: " . htmlspecialchars($conn->error));
 }
 $stmt->bind_param('i', $recipe_id);
 $stmt->execute();
@@ -23,20 +21,22 @@ $result = $stmt->get_result();
 $recipe = $result->fetch_assoc();
 $stmt->close();
 $conn->close();
-
 if (!$recipe) {
-    die('Recipe not found.');
+  die('Recipe not found.');
 }
-
 // Use image_url from database, fallback to default if missing
 $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) : 'https://readdy.ai/api/search-image?query=A%20delicious%20homemade%20margherita%20pizza%20with%20fresh%20mozzarella%2C%20tomatoes%2C%20and%20basil%20leaves.%20The%20crust%20is%20perfectly%20baked%20with%20a%20slight%20char.%20Steam%20is%20rising%20from%20the%20hot%20pizza.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=400&height=300&seq=8&orientation=landscape';
 ?>
+<?php include 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title><?= htmlspecialchars($recipe['title']) ?> - Dish Diary</title>
   <link rel="stylesheet" href="recipes.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     .detailed-container {
       max-width: 600px;

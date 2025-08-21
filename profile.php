@@ -7,7 +7,6 @@ if (!isset($_SESSION['id'])) {
   header('Location: login.php');
   exit();
 }
-
 // Fetch user info from database using session id
 $user_id = $_SESSION['id'];
 $conn = new mysqli('localhost', 'root', '', 'dish_diary');
@@ -22,9 +21,31 @@ $stmt->fetch();
 $stmt->close();
 $conn->close();
 ?>
+<?php include 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .profile-avatar {
+      animation: avatarBounce 1.8s infinite alternate cubic-bezier(.68,-0.55,.27,1.55);
+      color: #fff;
+      background: linear-gradient(135deg, #ffb366 0%, #ff6b35 100%) !important;
+      border: 4px solid #fff3e0;
+      min-width: 90px;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes avatarBounce {
+      0% { transform: scale(1) rotate(-8deg); }
+      50% { transform: scale(1.08) rotate(8deg); }
+      100% { transform: scale(1) rotate(-8deg); }
+    }
+  </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - Dish Diary</title>

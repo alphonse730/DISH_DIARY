@@ -1,3 +1,4 @@
+<?php include 'navbar.php'; ?>
 <!-- test.php -->
 
 
@@ -17,6 +18,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Profile';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dish Diary - Food Recipe Management System</title>
+  <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="main.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">

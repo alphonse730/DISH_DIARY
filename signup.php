@@ -1,3 +1,4 @@
+<?php include 'navbar.php'; ?>
 <!-- signup.php -->
 
 
@@ -14,15 +15,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Sanitize inputs
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $plain_password = $_POST['password'];
-    $role = 'user'; // Default role
+  // Sanitize inputs
+  $name = trim($_POST['name']);
+  $email = trim($_POST['email']);
+  $plain_password = $_POST['password'];
+  $role = 'user'; // Default role
 
-    if (empty($name) || empty($email) || empty($plain_password)) {
-        $error = "All fields are required.";
-    } else {
+  // Password validation
+  $password_valid = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/', $plain_password);
+
+  if (empty($name) || empty($email) || empty($plain_password)) {
+    $error = "All fields are required.";
+  } elseif (!$password_valid) {
+    $error = "Password must be at least 8 characters and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special symbol.";
+  } else {
         // Check if user exists
         $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -62,6 +68,7 @@ else {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dish Diary - Signup</title>
+  <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="signup.css" />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">

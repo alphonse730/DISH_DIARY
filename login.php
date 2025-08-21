@@ -1,42 +1,38 @@
-<!-- login.php -->
 <?php
+// login.php
 session_start();
 $success = "";
 $error = "";
 
 // Handle login form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
+  $email = trim($_POST['email']);
+  $password = $_POST['password'];
 
-    $conn = new mysqli("localhost", "root", "", "dish_diary");
+  $conn = new mysqli("localhost", "root", "", "dish_diary");
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    if ($stmt) {
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
+  $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+  if ($stmt) {
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
 
-        $result = $stmt->get_result();
-        if ($user = $result->fetch_assoc()) {
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['id'] = $user['id'];
-                $_SESSION['role'] = $user['role'];
-                $_SESSION['name'] = $user['name'];
+    $result = $stmt->get_result();
+    if ($user = $result->fetch_assoc()) {
+      if (password_verify($password, $user['password'])) {
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['name'] = $user['name'];
 
-                if ($user['role'] === 'admin') {
-                    header("Location: index.php");
-                } else {
-                    header("Location: index.php");
-                }
-                exit();
-            } else {
-                $error = "Invalid password.";
-            }
-        } else {
+        header("Location: index.php");
+        exit();
+      } else {
+        $error = "Invalid password.";
+      }
+    } else {
             $error = "No account found with that email.";
         }
 
@@ -54,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dish Diary - Login</title>
+  <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="login.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">

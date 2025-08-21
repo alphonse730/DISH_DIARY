@@ -1,3 +1,4 @@
+<?php include 'navbar.php'; ?>
 <!-- deleterecipe.php -->
 
 
@@ -22,5 +23,5 @@ $stmt->bind_param('ii', $recipe_id, $user_id);
 $stmt->execute();
 $stmt->close();
 $conn->close();
-header('Location: myrecipes.php?msg=deleted');
+echo "<script>console.log('Recipe deleted 🗑️'); alert('🗑️ Recipe deleted successfully! '); window.location.href='myrecipes.php?msg=deleted';</script>";
 exit();

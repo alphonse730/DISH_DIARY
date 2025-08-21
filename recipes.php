@@ -1,19 +1,21 @@
 <?php
 $conn = new mysqli("localhost", "root", "", "dish_diary");
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 $sql = "SELECT r.*, c.category_name FROM recipes r LEFT JOIN categories c ON r.category_id = c.category_id ORDER BY r.title DESC";
 $result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dish Diary - Recipes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f8ffae 0%, #ef9206 100%); min-height: 100vh; padding: 2rem 1rem; }
@@ -36,8 +38,10 @@ $result = $conn->query($sql);
         @media (max-width: 768px) { .page-title { font-size: 2.5rem; } .recipe-container { grid-template-columns: 1fr; gap: 1.5rem; } }
         @media (max-width: 480px) { body { padding: 1rem 0.5rem; } .page-title { font-size: 2rem; } .recipe-card h2 { margin: 1rem 1rem 0.5rem; font-size: 1.2rem; } .recipe-card p { margin: 0 1rem 0.8rem; } .recipe-card .category { margin: 0 1rem 1rem; } }
     </style>
+    
 </head>
 <body>
+    <?php include 'navbar.php'; ?>
     <div class="floating-elements">
         <div class="floating-circle"></div>
         <div class="floating-circle"></div>

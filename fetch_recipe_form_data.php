@@ -1,3 +1,4 @@
+<?php include 'navbar.php'; ?>
 <!-- fetch_recipe_form_data.php -->
 
 <?php

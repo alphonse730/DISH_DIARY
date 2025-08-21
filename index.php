@@ -12,8 +12,129 @@ $is_logged_in = isset($_SESSION['id']);
   <title>Dish Diary - Food Recipe Management System</title>
   <link rel="stylesheet" href="index.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <style>
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .container.nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      height: 80px;
+      gap: 2.5rem;
+    }
+    .brand {
+      flex: 0 0 auto;
+      margin-right: 2.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .brand-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      color: #ff6b35;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .brand-title:hover {
+      transform: scale(1.05);
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    .nav-link:hover::before,
+    .nav-link.active::before {
+      left: 0;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 1.2em;
+    }
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3em;
+      color: #ff6b35;
+      margin-right: 0.5em;
+      transition: color 0.2s;
+    }
+    .icon-btn:hover {
+      color: #f7931e;
+    }
+    .sign-in-btn {
+      background: linear-gradient(90deg, #ff6b35, #f7931e);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5em 1.2em;
+      font-size: 1.05em;
+      font-weight: 600;
+      box-shadow: 0 2px 12px #ff6b6b22;
+      cursor: pointer;
+      margin-left: 0.5em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .sign-in-btn:hover {
+      background: linear-gradient(90deg, #f7931e, #ff6b35);
+    }
+    @media (max-width: 900px) {
+      .container.nav-container { flex-direction: column; height: auto; padding: 0 10px; }
+      .nav-menu { gap: 1rem; }
+    }
+    @media (max-width: 600px) {
+      .container.nav-container { flex-direction: column; height: auto; padding: 0 5px; }
+      .nav-menu { flex-wrap: wrap; gap: 0.5rem; }
+      .brand-title { font-size: 1.3rem; }
+    }
+    body { padding-top: 90px; }
+  </style>
   <script>
     var isLoggedIn = <?php echo $is_logged_in ? 'true' : 'false'; ?>;
   </script>
@@ -38,29 +159,25 @@ $is_logged_in = isset($_SESSION['id']);
 <header class="navbar">
   <div class="container nav-container">
     <div class="brand">
-      <a href="#" class="brand-title">Dish Diary</a>
+      <a href="index.php" class="brand-title">Dish Diary</a>
     </div>
     <nav class="nav-menu" id="mainNav">
       <a href="index.php" class="nav-link">Home</a>
-      <a href="recipes.php" class="nav-link">Recipes</a>
-      <a href="categories.php" class="nav-link">Categories</a>
-      <a href="#" class="nav-link">Cooking tips</a>
-      <a href="#" class="nav-link">About</a>
-      <a href="#" class="nav-link">Contact</a>
+  <a href="recipes.php" class="nav-link login-required">Recipes</a>
+  <a href="categories.php" class="nav-link login-required">Categories</a>
+  <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
+  <a href="about.php" class="nav-link login-required">About</a>
+  <a href="contact.php" class="nav-link login-required">Contact</a>
     </nav>
     <div class="nav-icons">
       <div class="icon-btn"><i class="ri-search-line ri-lg"></i></div>
       <div class="icon-btn"><i class="ri-heart-line ri-lg"></i></div>
-
       <?php if (isset($_SESSION['id'])): ?>
-        <!-- Logged in -->
         <a href="profile.php" class="sign-in-btn">Profile</a>
       <?php else: ?>
-        <!-- Not logged in -->
         <a href="signup.php" class="sign-in-btn">Signup</a>
         <a href="login.php" class="sign-in-btn">Login</a>
       <?php endif; ?>
-
       <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
   </div>
@@ -86,45 +203,45 @@ $is_logged_in = isset($_SESSION['id']);
   <div class="container">
     <div class="section-header">
       <h2>Popular Categories</h2>
-      <a href="#" class="view-all">View All <i class="ri-arrow-right-line"></i></a>
+  <a href="recipes.php" class="view-all login-required">View All <i class="ri-arrow-right-line"></i></a>
     </div>
     <div class="categories-grid">
-      <a href="category.php?category_id=1" class="category-card">
+  <a href="category.php?category_id=1" class="category-card login-required">
         <img src="https://media.istockphoto.com/id/1292563627/photo/assorted-south-indian-breakfast-foods-on-wooden-background-ghee-dosa-uttappam-medhu-vada.jpg?s=612x612&w=0&k=20&c=HvuYT3RiWj5YsvP2_pJrSWIcZUXhnTKqjKhdN3j_SgY=" alt="Breakfast">
         <div class="category-overlay"><span>Breakfast</span></div>
         <div class="category-info">
           <h3>Breakfast</h3>
         </div>
       </a>
-      <a href="category.php?category_id=2" class="category-card">
+  <a href="category.php?category_id=2" class="category-card login-required">
         <img src="https://t3.ftcdn.net/jpg/06/53/02/64/360_F_653026495_ZmK9aF4vLIbScED62p6BlzrluL0Q9IJo.jpg" alt="Lunch">
         <div class="category-overlay"><span>Lunch</span></div>
         <div class="category-info">
           <h3>Lunch</h3>
         </div>
       </a>
-      <a href="category.php?category_id=3" class="category-card">
+  <a href="category.php?category_id=3" class="category-card login-required">
         <img src="https://st.depositphotos.com/1006627/2011/i/450/depositphotos_20112143-stock-photo-indian-food.jpg" alt="Dinner">
         <div class="category-overlay"><span>Dinner</span></div>
         <div class="category-info">
           <h3>Dinner</h3>
         </div>
       </a>
-      <a href="category.php?category_id=5" class="category-card">
+  <a href="category.php?category_id=5" class="category-card login-required">
         <img src="https://media.istockphoto.com/id/1054228718/photo/indian-sweets-in-a-plate-includes-gulab-jamun-rasgulla-kaju-katli-morichoor-bundi-laddu.jpg?s=612x612&w=0&k=20&c=hYWCXLaldKvhxdBa83M0RnUij7BCmhf-ywWdvyIXR40=" alt="Desserts">
         <div class="category-overlay"><span>Desserts</span></div>
         <div class="category-info">
           <h3>Desserts</h3>
         </div>
       </a>
-      <a href="category.php?category_id=4" class="category-card">
+  <a href="category.php?category_id=4" class="category-card login-required">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHMGRPQhJ6e_lQlEjZk_SD2_asAyh6__TlCQ&s" alt="Snacks">
         <div class="category-overlay"><span>Snacks</span></div>
         <div class="category-info">
           <h3>Snacks</h3>
         </div>
       </a>
-      <a href="category.php?category_id=6" class="category-card">
+  <a href="category.php?category_id=6" class="category-card login-required">
         <img src="https://media.istockphoto.com/id/1253099922/photo/assortment-of-fresh-fruits-and-vegetables-juices-in-rainbow-colors.jpg?s=612x612&w=0&k=20&c=lFC0lAcR0FoPegoMTuJxc3fEAISbJVwZ1VmWNHzVEX8=" alt="Juices">
         <div class="category-overlay"><span>Juices</span></div>
         <div class="category-info">
@@ -139,88 +256,49 @@ $is_logged_in = isset($_SESSION['id']);
   <div class="container">
     <div class="section-header">
       <h2>Featured Recipes</h2>
-      <div class="filter-btn-group">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Latest</button>
-        <button class="filter-btn">Popular</button>
-      </div>
+      
     </div>
+    <?php
+    // Connect to database
+    $conn = new mysqli('localhost', 'root', '', 'dish_diary');
+    if ($conn->connect_error) {
+      die('Database connection failed: ' . $conn->connect_error);
+    }
+    // Get 3 random recipes with category name
+  $sql = "SELECT r.*, c.category_name, u.name AS user_name FROM recipes r LEFT JOIN categories c ON r.category_id = c.category_id LEFT JOIN users u ON r.id = u.id ORDER BY RAND() LIMIT 3";
+  $result = $conn->query($sql);
+    ?>
     <div class="featured-grid">
-      <div class="recipe-card">
-        <div class="recipe-img-wrap">
-          <img src="https://readdy.ai/api/search-image?query=A%20delicious%20homemade%20margherita%20pizza%20with%20fresh%20mozzarella%2C%20tomatoes%2C%20and%20basil%20leaves.%20The%20crust%20is%20perfectly%20baked%20with%20a%20slight%20char.%20Steam%20is%20rising%20from%20the%20hot%20pizza.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=400&height=300&seq=8&orientation=landscape" alt="Homemade Margherita Pizza">
-          <div class="fav-btn"><i class="ri-heart-line"></i></div>
-          <div class="recipe-label italian">Italian</div>
-        </div>
-        <div class="recipe-info">
-          <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i><span>(128)</span></div>
-          <h3>Homemade Margherita Pizza</h3>
-          <p>Classic Italian pizza with fresh mozzarella, tomatoes, and basil on a homemade crust.</p>
-          <div class="recipe-meta">
-            <span><i class="ri-time-line"></i> 30 mins</span>
-            <span><i class="ri-fire-line"></i> Medium</span>
-            <span><i class="ri-user-line"></i> 4 servings</span>
+      <?php while ($row = $result->fetch_assoc()): ?>
+        <div class="recipe-card">
+          <div class="recipe-img-wrap">
+            <img src="<?= !empty($row['image_url']) ? htmlspecialchars($row['image_url']) : 'https://readdy.ai/api/search-image?query=food&width=400&height=300' ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+            <div class="fav-btn"><i class="ri-heart-line"></i></div>
+            <div class="recipe-label <?= strtolower(htmlspecialchars($row['category_name'])) ?>"><?= htmlspecialchars($row['category_name']) ?></div>
           </div>
-          <div class="recipe-footer">
-            <div class="author">
-              <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20female%20chef%20with%20brown%20hair%20and%20a%20friendly%20smile%2C%20wearing%20a%20white%20chefs%20coat.%20The%20background%20is%20neutral%20and%20the%20lighting%20is%20soft%20and%20flattering.&width=50&height=50&seq=9&orientation=squarish" alt="Chef">
-              <span>Emily Rodriguez</span>
+          <div class="recipe-info">
+            <!-- No ratings for now, keep stars empty -->
+            <div class="stars"><i class="ri-star-line"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><span></span></div>
+            <h3><?= htmlspecialchars($row['title']) ?></h3>
+            <p><?= htmlspecialchars(mb_strimwidth($row['description'], 0, 80, '...')) ?></p>
+            <div class="recipe-meta">
+              <span><i class="ri-time-line"></i> <?= htmlspecialchars($row['prep_time_min'] + $row['cook_time_min']) ?> mins</span>
+              <span><i class="ri-fire-line"></i> <?= isset($row['difficulty_id']) ? ($row['difficulty_id'] == 1 ? 'Easy' : ($row['difficulty_id'] == 2 ? 'Medium' : 'Hard')) : '' ?></span>
             </div>
-            <a href="#" class="view-recipe-link">View Recipe</a>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-img-wrap">
-          <img src="https://readdy.ai/api/search-image?query=A%20bowl%20of%20creamy%20mushroom%20risotto%20garnished%20with%20parmesan%20cheese%20and%20fresh%20herbs.%20The%20risotto%20has%20a%20rich%2C%20creamy%20texture%20with%20visible%20mushroom%20pieces.%20Steam%20is%20rising%20from%20the%20hot%20dish.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=400&height=300&seq=10&orientation=landscape" alt="Creamy Mushroom Risotto">
-          <div class="fav-btn"><i class="ri-heart-line"></i></div>
-          <div class="recipe-label italian">Italian</div>
-        </div>
-        <div class="recipe-info">
-          <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-line"></i><span>(94)</span></div>
-          <h3>Creamy Mushroom Risotto</h3>
-          <p>Creamy Arborio rice slowly cooked with mushrooms, white wine, and Parmesan cheese.</p>
-          <div class="recipe-meta">
-            <span><i class="ri-time-line"></i> 45 mins</span>
-            <span><i class="ri-fire-line"></i> Medium</span>
-            <span><i class="ri-user-line"></i> 4 servings</span>
-          </div>
-          <div class="recipe-footer">
-            <div class="author">
-              <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20male%20chef%20with%20dark%20hair%20and%20a%20beard%2C%20wearing%20a%20black%20chefs%20coat.%20The%20background%20is%20neutral%20and%20the%20lighting%20is%20soft%20and%20flattering.&width=50&height=50&seq=11&orientation=squarish" alt="Chef">
-              <span>Michael Chen</span>
+            <div class="recipe-footer">
+              <div class="author">
+                <img src="https://readdy.ai/api/search-image?query=chef&width=50&height=50" alt="Chef">
+                <span><?= !empty($row['user_name']) ? htmlspecialchars($row['user_name']) : 'Unknown Chef' ?></span>
+              </div>
+              <a href="detailedrecipe.php?recipe_id=<?= urlencode($row['recipe_id']) ?>" class="view-recipe-link login-required">View Recipe</a>
             </div>
-            <a href="#" class="view-recipe-link">View Recipe</a>
           </div>
         </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-img-wrap">
-          <img src="https://readdy.ai/api/search-image?query=A%20beautifully%20arranged%20plate%20of%20grilled%20salmon%20with%20asparagus%20and%20lemon.%20The%20salmon%20has%20perfect%20grill%20marks%20and%20is%20garnished%20with%20fresh%20herbs.%20The%20dish%20is%20served%20on%20a%20white%20plate.%20The%20background%20is%20simple%20and%20clean%20to%20highlight%20the%20dish.&width=400&height=300&seq=12&orientation=landscape" alt="Grilled Salmon with Asparagus">
-          <div class="fav-btn"><i class="ri-heart-line"></i></div>
-          <div class="recipe-label seafood">Seafood</div>
-        </div>
-        <div class="recipe-info">
-          <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><span>(156)</span></div>
-          <h3>Grilled Salmon with Asparagus</h3>
-          <p>Fresh salmon fillets grilled to perfection and served with roasted asparagus and lemon.</p>
-          <div class="recipe-meta">
-            <span><i class="ri-time-line"></i> 25 mins</span>
-            <span><i class="ri-fire-line"></i> Easy</span>
-            <span><i class="ri-user-line"></i> 2 servings</span>
-          </div>
-          <div class="recipe-footer">
-            <div class="author">
-              <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20female%20chef%20with%20blonde%20hair%20tied%20back%2C%20wearing%20a%20gray%20chefs%20coat.%20The%20background%20is%20neutral%20and%20the%20lighting%20is%20soft%20and%20flattering.&width=50&height=50&seq=13&orientation=squarish" alt="Chef">
-              <span>Sophia Williams</span>
-            </div>
-            <a href="#" class="view-recipe-link">View Recipe</a>
-          </div>
-        </div>
-      </div>
+      <?php endwhile; ?>
     </div>
+    <?php $conn->close(); ?>
     <div class="center-btn">
-      <a href="#" class="outline-btn">View All Recipes</a>
+  <a href="recipes.php" class="outline-btn login-required">View All Recipes</a>
     </div>
   </div>
 </section>
@@ -258,8 +336,8 @@ $is_logged_in = isset($_SESSION['id']);
         <h2>Ready to Start Your Culinary Journey?</h2>
         <p>Join thousands of food enthusiasts who are discovering, creating, and sharing amazing recipes every day.</p>
         <div class="cta-btn-group">
-          <a href="#" class="cta-btn-primary">Sign Up Free</a>
-          <a href="#" class="cta-btn-outline">Learn More</a>
+          <a href="signup.php" class="cta-btn-primary">Sign Up for Free</a>
+          <a href="about.php" class="cta-btn-outline login-required">Learn More</a>
         </div>
       </div>
       <div class="cta-image">
@@ -268,58 +346,37 @@ $is_logged_in = isset($_SESSION['id']);
     </div>
   </div>
 </section>
-<!-- Newsletter Section -->
-<section class="newsletter-section">
-  <div class="container">
-    <div class="newsletter-content">
-      <h2>Subscribe to Our Newsletter</h2>
-      <p>Get weekly recipe inspiration, cooking tips, and exclusive content delivered to your inbox.</p>
-      <div class="newsletter-form">
-        <input type="email" placeholder="Enter your email address">
-        <button>Subscribe</button>
-      </div>
-      <div class="newsletter-checkbox">
-        <label class="custom-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          I agree to receive emails from Dish Diary
-        </label>
-      </div>
-    </div>
-  </div>
-</section>
+
 <!-- Footer -->
 <footer class="footer">
   <div class="container">
     <div class="footer-main">
       <div class="footer-col">
-        <a href="#" class="brand-title foot-brand">Dish Diary</a>
+  <a href="#" class="brand-title foot-brand login-required">Dish Diary</a>
         <p class="footer-desc">Discover, create, and share amazing recipes with food enthusiasts around the world.</p>
         <div class="footer-socials">
-          <a href="#"><i class="ri-facebook-fill"></i></a>
-          <a href="#"><i class="ri-instagram-line"></i></a>
-          <a href="#"><i class="ri-twitter-x-line"></i></a>
-          <a href="#"><i class="ri-pinterest-line"></i></a>
+          <a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a>
+          <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="ri-instagram-line"></i></a>
+          <a href="https://x.com/"><i class="ri-twitter-x-line"></i></a>
+          <a href="https://in.pinterest.com/"><i class="ri-pinterest-line"></i></a>
         </div>
       </div>
       <div class="footer-col">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Recipes</a></li>
-          <li><a href="#">Categories</a></li>
-          <li><a href="#">Popular</a></li>
-          <li><a href="#">Latest</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="recipes.php" class="login-required">Recipes</a></li>
+          <li><a href="categories.php " class="login-required">Categories</a></li>
+          
         </ul>
       </div>
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Cooking Tips</a></li>
-          <li><a href="#">Community</a></li>
-          <li><a href="#">Recipe Guidelines</a></li>
+          <li><a href="#" class="login-required">Help Center</a></li>
+          <li><a href="#" class="login-required">Blog</a></li>
+          <li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li>
+         
         </ul>
       </div>
       <div class="footer-col">
@@ -334,9 +391,9 @@ $is_logged_in = isset($_SESSION['id']);
     <div class="footer-bottom">
       <p>© 2025 Dish Diary. All rights reserved.</p>
       <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+  <a href="#" class="login-required">Privacy Policy</a>
+  <a href="terms.php" class="login-required">Terms of Service</a>
+  <a href="#" class="login-required">Cookie Policy</a>
       </div>
     </div>
   </div>
@@ -350,22 +407,26 @@ $is_logged_in = isset($_SESSION['id']);
     document.getElementById("loginModal").style.display = "none";
   }
 
-  // Restrict nav links and category cards to logged-in users
-  document.querySelectorAll('.nav-menu .nav-link').forEach(function(link) {
-    link.addEventListener('click', function(e) {
+  // Restrict all login-required links/buttons for non-logged-in users
+  document.querySelectorAll('a.login-required, button.login-required').forEach(function(el) {
+    el.addEventListener('click', function(e) {
       if (!isLoggedIn) {
         e.preventDefault();
         openLoginModal();
       }
     });
   });
-  document.querySelectorAll('.categories-grid .category-card').forEach(function(card) {
-    card.addEventListener('click', function(e) {
-      if (!isLoggedIn) {
-        e.preventDefault();
-        openLoginModal();
-      }
-    });
+
+  // Add scroll effect to navbar like cookingtips.php
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+      navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+    } else {
+      navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+      navbar.style.boxShadow = 'none';
+    }
   });
 </script>
 
