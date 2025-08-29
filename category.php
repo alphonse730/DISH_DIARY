@@ -21,7 +21,7 @@ $recipes_result = $recipes->get_result();
 $recipes->close();
 $conn->close();
 ?>
-<?php include 'navbar.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
