@@ -1,3 +1,7 @@
+<!-- categories.php -->
+<!-- footer sheriyakkanammm -->
+
+
 
 <?php
 $conn = new mysqli("localhost", "root", "", "dish_diary");
