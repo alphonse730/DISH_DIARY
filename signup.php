@@ -1,4 +1,4 @@
-<?php include 'navbar.php'; ?>
+
 <!-- signup.php -->
 
 
@@ -126,7 +126,7 @@ else {
       </div>
       <!-- Back to Home Button -->
       <div style="text-align: center; margin-bottom: 15px;">
-        <a href="home.php" class="back-home-btn" style="display: inline-block; background:#f5f5f5; color:#333; padding:8px 22px; border-radius:24px; text-decoration:none; font-weight:600; box-shadow:0 0 6px #eee; transition:background 0.2s;">
+        <a href="index.php" class="back-home-btn" style="display: inline-block; background:#f5f5f5; color:#333; padding:8px 22px; border-radius:24px; text-decoration:none; font-weight:600; box-shadow:0 0 6px #eee; transition:background 0.2s;">
           <i class="ri-arrow-left-line" style="vertical-align:middle; margin-right:6px;"></i>
           Home
         </a>

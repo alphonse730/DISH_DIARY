@@ -626,106 +626,9 @@ body {
   .cta-image { min-width: 0; max-height: none; }
 }
 
-/* Newsletter Section */
-.newsletter-section {
-  background: var(--white);
-  padding: 4rem 0 1rem 0;
-}
-.newsletter-content {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
-.newsletter-content h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: var(--gray-800);
-}
-.newsletter-content p {
-  color: var(--gray-600, #4b5563);
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-}
-.newsletter-form {
-  display: flex;
-  gap: 1rem;
-  flex-direction: row;
-  margin-bottom: 1.2rem;
-}
-.newsletter-form input[type="email"] {
-  flex: 1;
-  padding: 1rem;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  outline: none;
-  transition: border 0.2s;
-}
-.newsletter-form input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(255,107,107,0.2);
-}
-.newsletter-form button {
-  padding: 1rem 2.2rem;
-  background: var(--primary);
-  color: var(--white);
-  border: none;
-  border-radius: var(--border-radius-button);
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.newsletter-form button:hover { background: #ff8585; }
-@media (max-width: 600px) {
-  .newsletter-form { flex-direction: column; }
-}
-.newsletter-checkbox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
-.custom-checkbox {
-  display: flex;
-  align-items: center;
-  font-size: 0.97em;
-  color: var(--gray-600);
-  cursor: pointer;
-  user-select: none;
-}
-.custom-checkbox input[type="checkbox"] {
-  display: none;
-}
-.custom-checkbox .checkmark {
-  width: 18px; height: 18px;
-  border-radius: 4px;
-  border: 2px solid var(--gray-400);
-  background: var(--white);
-  margin-right: 0.5em;
-  display: inline-block;
-  position: relative;
-  transition: border-color 0.2s, background 0.2s;
-}
-.custom-checkbox input:checked + .checkmark {
-  background: var(--primary);
-  border-color: var(--primary);
-}
-.custom-checkbox .checkmark::after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 4px; top: 0px;
-  width: 6px; height: 12px;
-  border: solid var(--white);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-.custom-checkbox input:checked + .checkmark::after {
-  display: block;
-}
 
-/* Footer */
+
+/* FOOTER  CSS START*/
 .footer {
   background: var(--gray-800);
   color: var(--white);
@@ -815,6 +718,7 @@ body {
   transition: color 0.2s;
 }
 .footer-links a:hover { color: var(--white); }
+/* FOOTER CSS END */
 
 /* ===================
    Modern Login Alert

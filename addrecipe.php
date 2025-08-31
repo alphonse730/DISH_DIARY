@@ -24,7 +24,7 @@ $user_id = $_SESSION['id'];
   <style>
 
     /* Navbar Start */
-/* ====== NAVBAR START ====== */
+/* ====== NAVBAR  CSS START ====== */
     header.navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -195,7 +195,126 @@ $user_id = $_SESSION['id'];
       padding-right: 1rem;
     }
 
-    /* ====== NAVBAR END ====== */
+    /* ====== NAVBAR CSS END ====== */
+
+
+     /* FOOTER  CSS START*/
+    .footer-wrapper {
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin: 0 auto;
+}
+
+
+.footer {
+  background: var(--gray-800);
+  color: var(--white);
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.footer-main {
+  
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 0 auto 3rem auto;
+}
+@media (max-width: 1100px) {
+  .footer-main { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .footer-main { grid-template-columns: 1fr; }
+}
+.foot-brand {
+  color: #df6209ff;;
+  margin-bottom: 1.5rem;
+}
+.footer-desc {
+  color: var(--gray-400);
+  margin-bottom: 1.5rem;
+}
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--gray-700);
+  color: var(--white);
+  margin-right: 0.5rem;
+  font-size: 1.25em;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.footer-socials a:hover { background: var(--primary); }
+.footer-col h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-col li {
+  color: var(--gray-400);
+  margin-bottom: 0.7rem;
+  font-size: 1em;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4em;
+}
+.footer-col li a {
+  color: var(--gray-400);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col li a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid var(--gray-700);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gray-700);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom p {
+  color: var(--gray-400);
+  font-size: 0.98em;
+  margin: 0;
+}
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+.footer-links a {
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 0.98em;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+/* FOOTER CSS END */
     .edit-recipe-container { max-width: 540px; margin: 3rem auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px #ff6b6b11; padding: 2.5rem 2.2rem 2rem; }
     .edit-recipe-title { font-family: var(--font-brand); color: var(--primary); font-size: 2rem; margin-bottom: 1.5rem; }
     .edit-recipe-form label { display: block; margin-bottom: 0.5em; font-weight: 500; color: #444; }
@@ -275,39 +394,40 @@ $user_id = $_SESSION['id'];
     <a href="myrecipes.php" style="margin-left:1em;">Cancel</a>
   </form>
 </div>
+	 <!-- ✅ FULL-WIDTH FOOTER FIXED -->
 <footer class="footer">
-  <div class="container">
+  <!-- Remove the limiting .container -->
+  <div class="footer-wrapper">
     <div class="footer-main">
       <div class="footer-col">
-        <a href="#" class="brand-title foot-brand">Dish Diary</a>
+        <a href="#" class="brand-title foot-brand login-required">Dish Diary</a>
         <p class="footer-desc">Discover, create, and share amazing recipes with food enthusiasts around the world.</p>
         <div class="footer-socials">
-          <a href="#"><i class="ri-facebook-fill"></i></a>
-          <a href="#"><i class="ri-instagram-line"></i></a>
-          <a href="#"><i class="ri-twitter-x-line"></i></a>
-          <a href="#"><i class="ri-pinterest-line"></i></a>
+          <a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a>
+          <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="ri-instagram-line"></i></a>
+          <a href="https://x.com/"><i class="ri-twitter-x-line"></i></a>
+          <a href="https://in.pinterest.com/"><i class="ri-pinterest-line"></i></a>
         </div>
       </div>
+
       <div class="footer-col">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Recipes</a></li>
-          <li><a href="#">Categories</a></li>
-          <li><a href="#">Popular</a></li>
-          <li><a href="#">Latest</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="recipes.php" class="login-required">Recipes</a></li>
+          <li><a href="categories.php" class="login-required">Categories</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Cooking Tips</a></li>
-          <li><a href="#">Community</a></li>
-          <li><a href="#">Recipe Guidelines</a></li>
+          <li><a href="#" class="login-required">Help Center</a></li>
+          <li><a href="#" class="login-required">Blog</a></li>
+          <li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h3>Contact Us</h3>
         <ul>
@@ -317,15 +437,18 @@ $user_id = $_SESSION['id'];
         </ul>
       </div>
     </div>
+
     <div class="footer-bottom">
       <p>© 2025 Dish Diary. All rights reserved.</p>
       <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="#" class="login-required">Privacy Policy</a>
+        <a href="terms.php" class="login-required">Terms of Service</a>
+        <a href="#" class="login-required">Cookie Policy</a>
       </div>
     </div>
   </div>
 </footer>
+<!-- FOOTER END -->
+
 </body>
 </html>

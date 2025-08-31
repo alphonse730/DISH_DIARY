@@ -1,3 +1,7 @@
+<!-- recipes.php -->
+
+
+
 <?php
 $conn = new mysqli("localhost", "root", "", "dish_diary");
 if ($conn->connect_error) {
@@ -20,11 +24,11 @@ $result = $conn->query($sql);
     <style>
 
         /* Navbar Start */
-/* ====== NAVBAR START ====== */
+/* ====== NAVBAR CSS START ====== */
     header.navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 110px;
+      height: 115px;
       width: 100%;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -186,12 +190,16 @@ $result = $conn->query($sql);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #f8ffae 0%, #ef9206 100%);
       min-height: 100vh;
-      padding-top: 110px;
+      padding-top: 115px;
       padding-left: 1rem;
       padding-right: 1rem;
     }
 
-    /* ====== NAVBAR END ====== */
+    /* ====== NAVBAR CSS END ====== */
+
+
+    
+
 
     .page-title {
       text-align: center;
@@ -229,9 +237,7 @@ $result = $conn->query($sql);
       transform: translateY(-4px) scale(1.04);
       background: #ffe0b2;
     }
-/* navbar end */
-
-
+/* navbar  css end */
 
 
 
@@ -264,6 +270,7 @@ $result = $conn->query($sql);
 </head>
 <body>
     
+<!-- NAVBAR START -->
 
 <header class="navbar">
   <div class="container nav-container">
@@ -286,16 +293,7 @@ $result = $conn->query($sql);
     </div>
   </div>
 </header>
-
-
-
-
-
-
-
-
-
-
+<!-- NAVBAR END -->
 
 
 
@@ -311,6 +309,7 @@ $result = $conn->query($sql);
 
 
 <br><br>
+<main>
     <h1 class="page-title">All Recipes</h1>
     <div class="recipe-container">
         <?php while ($row = $result->fetch_assoc()): ?>
@@ -324,5 +323,67 @@ $result = $conn->query($sql);
             </a>
         <?php endwhile; ?>
     </div>
+    </main>
+
+
+
+    	 <!-- ✅ FULL-WIDTH FOOTER FIXED -->
+<!-- FOOTER (use this HTML exactly if you want the one from canvas) -->
+ <footer class="footer">
+  <div class="footer-wrapper">
+    <div class="footer-main">
+      <div class="footer-col">
+        <span class="foot-brand">Dish Diary</span>
+        <p class="footer-desc">
+          Discover, create, and share amazing recipes with food enthusiasts around the world.
+        </p>
+        <div class="footer-socials">
+          <a href="#"><i class="ri-facebook-fill"></i></a>
+          <a href="#"><i class="ri-instagram-line"></i></a>
+          <a href="#"><i class="ri-twitter-x-line"></i></a>
+          <a href="#"><i class="ri-pinterest-line"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="recipes.php">Recipes</a></li>
+          <li><a href="categories.php">Categories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Cooking Tips</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="ri-map-pin-line"></i> 123 Recipe Street, Foodville, CA 90210</li>
+          <li><i class="ri-mail-line"></i> info@dishdiary.com</li>
+          <li><i class="ri-phone-line"></i> +1 (234) 567-890</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Dish Diary. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- FOOTER END -->
+
+
+
 </body>
 </html>

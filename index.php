@@ -15,6 +15,7 @@ $is_logged_in = isset($_SESSION['id']);
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
   <style>
+    /* NAVBAR CSS START */
     .navbar {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -26,16 +27,17 @@ $is_logged_in = isset($_SESSION['id']);
       transition: all 0.3s ease;
     }
     .container.nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      height: 80px;
-      gap: 2.5rem;
-    }
+  max-width: 1200px;
+  height: 90px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;  /* ← brand on left, menu center, icons right */
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
     .brand {
       flex: 0 0 auto;
       margin-right: 2.5rem;
@@ -89,10 +91,13 @@ $is_logged_in = isset($_SESSION['id']);
       transform: translateY(-2px);
     }
     .nav-icons {
-      display: flex;
-      align-items: center;
-      gap: 1.2em;
-    }
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+    
     .icon-btn {
       background: none;
       border: none;
@@ -133,6 +138,9 @@ $is_logged_in = isset($_SESSION['id']);
       .nav-menu { flex-wrap: wrap; gap: 0.5rem; }
       .brand-title { font-size: 1.3rem; }
     }
+
+
+    /* NAVBAR CSS END */
     body { padding-top: 90px; }
   </style>
   <script>
@@ -347,7 +355,7 @@ $is_logged_in = isset($_SESSION['id']);
   </div>
 </section>
 
-<!-- Footer -->
+<!-- FOOTER START -->
 <footer class="footer">
   <div class="container">
     <div class="footer-main">
@@ -398,6 +406,7 @@ $is_logged_in = isset($_SESSION['id']);
     </div>
   </div>
 </footer>
+<!-- FOOTER END -->
 
 <script>
   function openLoginModal() {
