@@ -400,9 +400,8 @@ $conn->close();
   </div>
 </section>
 
-	 <!-- ✅ FULL-WIDTH FOOTER FIXED -->
+	 <!-- ✅ FULL-WIDTH FOOTER -->
 <footer class="footer">
-  <!-- Remove the limiting .container -->
   <div class="footer-wrapper">
     <div class="footer-main">
       <div class="footer-col">
@@ -454,7 +453,7 @@ $conn->close();
     </div>
   </div>
 </footer>
-<!-- FOOTER END -->
+
 
 <script src="main.js"></script>
 </body>

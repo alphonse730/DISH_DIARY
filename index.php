@@ -178,16 +178,23 @@ $is_logged_in = isset($_SESSION['id']);
   <a href="contact.php" class="nav-link login-required">Contact</a>
     </nav>
     <div class="nav-icons">
-      <div class="icon-btn"><i class="ri-search-line ri-lg"></i></div>
-      <div class="icon-btn"><i class="ri-heart-line ri-lg"></i></div>
-      <?php if (isset($_SESSION['id'])): ?>
-        <a href="profile.php" class="sign-in-btn">Profile</a>
-      <?php else: ?>
-        <a href="signup.php" class="sign-in-btn">Signup</a>
-        <a href="login.php" class="sign-in-btn">Login</a>
-      <?php endif; ?>
-      <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
-    </div>
+  <div class="icon-btn"><i class="ri-search-line ri-lg"></i></div>
+
+  <!-- Favorites link -->
+  <a href="favorites.php" class="icon-btn login-required">
+    <i class="ri-heart-line ri-lg"></i>
+  </a>
+
+  <?php if (isset($_SESSION['id'])): ?>
+    <a href="profile.php" class="sign-in-btn">Profile</a>
+  <?php else: ?>
+    <a href="signup.php" class="sign-in-btn">Signup</a>
+    <a href="login.php" class="sign-in-btn">Login</a>
+  <?php endif; ?>
+  
+  <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
+</div>
+
   </div>
 </header>
 
@@ -277,13 +284,33 @@ $is_logged_in = isset($_SESSION['id']);
   $result = $conn->query($sql);
     ?>
     <div class="featured-grid">
-      <?php while ($row = $result->fetch_assoc()): ?>
-        <div class="recipe-card">
-          <div class="recipe-img-wrap">
-            <img src="<?= !empty($row['image_url']) ? htmlspecialchars($row['image_url']) : 'https://readdy.ai/api/search-image?query=food&width=400&height=300' ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-            <div class="fav-btn"><i class="ri-heart-line"></i></div>
-            <div class="recipe-label <?= strtolower(htmlspecialchars($row['category_name'])) ?>"><?= htmlspecialchars($row['category_name']) ?></div>
-          </div>
+  <?php while ($row = $result->fetch_assoc()): ?>
+    <?php
+      // Check if this recipe is already favorited by the logged-in user
+      $is_favorited = false;
+      if ($is_logged_in) {
+          $stmtFav = $conn->prepare("SELECT 1 FROM favorites WHERE user_id = ? AND recipe_id = ?");
+          $stmtFav->bind_param("ii", $_SESSION['id'], $row['recipe_id']);
+          $stmtFav->execute();
+          $is_favorited = $stmtFav->get_result()->num_rows > 0;
+          $stmtFav->close();
+      }
+    ?>
+    <div class="recipe-card">
+      <div class="recipe-img-wrap">
+        <img src="<?= !empty($row['image_url']) ? htmlspecialchars($row['image_url']) : 'https://readdy.ai/api/search-image?query=food&width=400&height=300' ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+
+        <!-- Heart button -->
+        <div class="fav-btn login-required"
+             data-recipe-id="<?= $row['recipe_id'] ?>">
+          <i class="<?= $is_favorited ? 'ri-heart-fill' : 'ri-heart-line' ?>"></i>
+        </div>
+
+        <div class="recipe-label <?= strtolower(htmlspecialchars($row['category_name'])) ?>">
+          <?= htmlspecialchars($row['category_name']) ?>
+        </div>
+      </div>
+
           <div class="recipe-info">
             <!-- No ratings for now, keep stars empty -->
             <div class="stars"><i class="ri-star-line"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><span></span></div>

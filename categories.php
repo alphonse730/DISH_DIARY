@@ -188,13 +188,15 @@ $categories = $conn->query("SELECT * FROM categories ORDER BY category_name ASC"
 
     /* Body padding to offset fixed navbar */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f8ffae 0%, #ef9206 100%);
-      min-height: 100vh;
-      padding-top: 115px;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8ffae 0%, #ef9206 100%);
+  min-height: 100%;       /* ✅ instead of 100vh */
+  padding-top: 115px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: 0;              /* ensure no default margin */
+}
+
 
     /* ====== NAVBAR   CSS END ====== */
 
