@@ -68,8 +68,8 @@ $result = $conn->query($sql);
       <a href="contact.php" class="nav-link login-required">Contact</a>
     </nav>
     <div class="nav-icons">
-      <div class="icon-btn"><i class="ri-search-line ri-lg"></i></div>
-      <div class="icon-btn"><i class="ri-heart-line ri-lg"></i></div>
+  <!-- Search icon removed as requested -->
+  <!-- Heart icon removed as requested -->
       <a href="profile.php" class="sign-in-btn">Profile</a>
       <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
@@ -96,11 +96,11 @@ $result = $conn->query($sql);
         </a>
 
         <!-- Heart button with dynamic state -->
-        <button class="favorite-btn <?= $row['is_favorited'] ? 'favorited' : '' ?>" 
-                data-recipe-id="<?= $row['recipe_id'] ?>" 
-                title="Toggle favorite">
-          <i class="<?= $row['is_favorited'] ? 'ri-heart-fill' : 'ri-heart-line' ?>"></i>
-        </button>
+  <button class="favorite-btn <?= $row['is_favorited'] ? 'favorited' : '' ?>" 
+    data-recipe-id="<?= $row['recipe_id'] ?>" 
+    title="Toggle favorite">
+    <i class="<?= $row['is_favorited'] ? 'ri-heart-fill' : 'ri-heart-line' ?>"></i>
+  </button>
       </div>
     <?php endwhile; ?>
   </div>

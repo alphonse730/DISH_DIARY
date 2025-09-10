@@ -367,8 +367,7 @@ $conn->close();
   <a href="contact.php" class="nav-link login-required">Contact</a>
     </nav>
     <div class="nav-icons">
-      <div class="icon-btn"><i class="ri-search-line ri-lg"></i></div>
-      <div class="icon-btn"><i class="ri-heart-line ri-lg"></i></div>
+  
          <a href="profile.php" class="sign-in-btn">Profile</a>
       <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
@@ -391,7 +390,10 @@ $conn->close();
         <!-- Add more fields as needed -->
       </div>
       <div style="margin-top: 2rem; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-        <a href="myrecipes.php" class="my-recipes-btn" style="display: inline-block; padding: 0.7em 2em; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #fff; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; box-shadow: 0 2px 12px #ff6b6b22; text-decoration: none; transition: background 0.2s, box-shadow 0.2s;"> <i class="ri-restaurant-2-line" style="margin-right: 8px;"></i>My Recipes</a>
+        <div style="display: flex; flex-direction: row; gap: 1rem; justify-content: center; width: 100%;">
+          <a href="myrecipes.php" class="my-recipes-btn" style="display: inline-block; padding: 0.7em 2em; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #fff; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; box-shadow: 0 2px 12px #ff6b6b22; text-decoration: none; transition: background 0.2s, box-shadow 0.2s;"> <i class="ri-restaurant-2-line" style="margin-right: 8px;"></i>My Recipes</a>
+          <a href="favorites.php" class="my-recipes-btn" style="display: inline-block; padding: 0.7em 2em; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #fff; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; box-shadow: 0 2px 12px #ff6b6b22; text-decoration: none; transition: background 0.2s, box-shadow 0.2s;"> <i class="ri-restaurant-2-line" style="margin-right: 8px;"></i>Favorite List</a>
+        </div>
         <form action="logout.php" method="post" style="width: 100%; display: flex; justify-content: center;">
           <button type="submit" class="logout-btn">Logout</button>
         </form>

@@ -25,7 +25,8 @@ if (!$recipe_id) {
 }
 
 // Check if favorite already exists
-$stmt = $conn->prepare("SELECT id FROM favorites WHERE user_id = ? AND recipe_id = ?");
+// Use favorite_id instead of id for the favorites table primary key
+$stmt = $conn->prepare("SELECT favorite_id FROM favorites WHERE user_id = ? AND recipe_id = ?");
 $stmt->bind_param("ii", $user_id, $recipe_id);
 $stmt->execute();
 $result = $stmt->get_result();

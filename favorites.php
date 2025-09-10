@@ -9,9 +9,9 @@ if (!isset($_SESSION['id'])) {
 $user_id = $_SESSION['id'];
 
 $sql = "
-  SELECT r.id AS recipe_id, r.title, r.description, r.image_url, c.category_name
+  SELECT r.recipe_id, r.title, r.description, r.image_url, c.category_name, f.favorite_id
   FROM recipes r
-  INNER JOIN favorites f ON r.id = f.recipe_id
+  INNER JOIN favorites f ON r.recipe_id = f.recipe_id
   LEFT JOIN categories c ON r.category_id = c.category_id
   WHERE f.user_id = ?
   ORDER BY r.title ASC

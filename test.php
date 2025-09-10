@@ -43,8 +43,8 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Profile';
       <a href="#" class="nav-link">Contact</a>
     </nav>
     <div class="nav-icons">
-      <div class="icon-btn"><i class="ri-search-line ri-lg"></i></div>
-      <div class="icon-btn"><i class="ri-heart-line ri-lg"></i></div>
+  <!-- Search icon removed as requested -->
+      
       <!-- Profile Button (instead of login/signup) -->
       <a href="profile.php" class="sign-in-btn" style="display: flex; align-items: center;">
         <i class="ri-user-line" style="margin-right: 6px;"></i>

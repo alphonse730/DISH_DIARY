@@ -404,8 +404,8 @@ $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) 
   <a href="contact.php" class="nav-link login-required">Contact</a>
     </nav>
     <div class="nav-icons">
-      <div class="icon-btn"><i class="ri-search-line ri-lg"></i></div>
-      <div class="icon-btn"><i class="ri-heart-line ri-lg"></i></div>
+  <!-- Search icon removed as requested -->
+      
          <a href="profile.php" class="sign-in-btn">Profile</a>
       <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
