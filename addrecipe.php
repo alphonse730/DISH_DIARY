@@ -1,27 +1,75 @@
 <!-- addrecipe.php -->
-
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
   header('Location: login.php');
   exit();
 }
+include 'db.php';
+
 $user_id = $_SESSION['id'];
-// ...existing code...
+$upload_error = '';
+$add_error = '';
+
+// Fetch dropdowns
+$categories = $conn->query("SELECT * FROM categories")->fetch_all(MYSQLI_ASSOC);
+$difficulties = $conn->query("SELECT * FROM difficultylevels")->fetch_all(MYSQLI_ASSOC);
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $title = $_POST['title'];
+  $description = $_POST['description'];
+  $steps = $_POST['steps'];
+  $prep_time = $_POST['prep_time_min'];
+  $cook_time = $_POST['cook_time_min'];
+  $nutrition = $_POST['nutrition_info'];
+  $difficulty_id = $_POST['difficulty_id'];
+  $category_id = $_POST['category_id'];
+  $image_path = '';
+
+  if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] == UPLOAD_ERR_OK) {
+    $img_name = basename($_FILES['image_file']['name']);
+    $ext = pathinfo($img_name, PATHINFO_EXTENSION);
+    $new_filename = 'recipe_' . time() . '.' . $ext;
+    $target_dir = 'uploads/';
+    $target_file = $target_dir . $new_filename;
+
+    if (move_uploaded_file($_FILES['image_file']['tmp_name'], $target_file)) {
+      $image_path = $target_file;
+    } else {
+      $upload_error = 'Image upload failed.';
+    }
+  }
+
+  if (empty($upload_error)) {
+    $stmt = $conn->prepare("INSERT INTO recipes (id, title, description, steps, prep_time_min, cook_time_min, nutrition_info, image_url, difficulty_id, category_id, status)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
+    $stmt->bind_param("isssiissii", $user_id, $title, $description, $steps, $prep_time, $cook_time, $nutrition, $image_path, $difficulty_id, $category_id);
+
+    if ($stmt->execute()) {
+      header("Location: myrecipes.php");
+      exit();
+    } else {
+      $add_error = "Something went wrong while adding the recipe.";
+    }
+  }
+}
 ?>
 
+<!-- HTML STARTS -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Add Recipe - Dish Diary</title>
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="profile.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    <style>
 
     /* Navbar Start */
 /* ====== NAVBAR  CSS START ====== */
@@ -325,38 +373,44 @@ $user_id = $_SESSION['id'];
     .edit-recipe-form .img-preview { margin-bottom: 1em; }
     .edit-recipe-form .img-preview img { max-width: 100%; max-height: 120px; border-radius: 8px; }
   </style>
+  </style>
 </head>
 <body>
-	<header class="navbar">
+
+<!-- ✅ Navbar -->
+<header class="navbar">
   <div class="container nav-container">
     <div class="brand">
       <a href="index.php" class="brand-title">Dish Diary</a>
     </div>
     <nav class="nav-menu" id="mainNav">
       <a href="index.php" class="nav-link">Home</a>
-  <a href="recipes.php" class="nav-link login-required">Recipes</a>
-  <a href="categories.php" class="nav-link login-required">Categories</a>
-  <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
-  <a href="about.php" class="nav-link login-required">About</a>
-  <a href="contact.php" class="nav-link login-required">Contact</a>
+      <a href="recipes.php" class="nav-link login-required">Recipes</a>
+      <a href="categories.php" class="nav-link login-required">Categories</a>
+      <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
+      <a href="about.php" class="nav-link login-required">About</a>
+      <a href="contact.php" class="nav-link login-required">Contact</a>
     </nav>
     <div class="nav-icons">
-  <!-- Search icon removed as requested -->
-      
-          <a href="profile.php" class="sign-in-btn">Profile</a>
+      <a href="profile.php" class="sign-in-btn">Profile</a>
       <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
   </div>
 </header>
+
+<!-- ✅ Add Recipe Form -->
 <div class="edit-recipe-container">
   <div class="edit-recipe-title">Add Recipe</div>
   <form class="edit-recipe-form" method="post" enctype="multipart/form-data">
     <label for="titleInput">Title</label>
     <input type="text" name="title" id="titleInput" required>
+
     <label for="descInput">Description</label>
     <textarea name="description" id="descInput" required></textarea>
+
     <label for="stepsInput">Steps</label>
     <textarea name="steps" id="stepsInput" required></textarea>
+
     <div style="display: flex; gap: 1em;">
       <div style="flex:1;">
         <label for="prepTimeInput">Prep Time (min)</label>
@@ -367,88 +421,83 @@ $user_id = $_SESSION['id'];
         <input type="number" name="cook_time_min" id="cookTimeInput" min="0" required>
       </div>
     </div>
+
     <label for="nutritionInput">Nutrition Info</label>
     <textarea name="nutrition_info" id="nutritionInput" placeholder="e.g. Calories: 200, Protein: 10g, ..."></textarea>
+
     <label for="difficultyInput">Difficulty</label>
     <select name="difficulty_id" id="difficultyInput" required>
+      <option value="">-- Select Difficulty --</option>
       <?php foreach ($difficulties as $d): ?>
         <option value="<?= $d['difficulty_id'] ?>"><?= htmlspecialchars($d['level_name']) ?></option>
       <?php endforeach; ?>
     </select>
+
     <label for="categoryInput">Category</label>
     <select name="category_id" id="categoryInput" required>
+      <option value="">-- Select Category --</option>
       <?php foreach ($categories as $c): ?>
         <option value="<?= $c['category_id'] ?>"><?= htmlspecialchars($c['category_name']) ?></option>
       <?php endforeach; ?>
     </select>
+
     <label for="imageFileInput">Image</label>
     <input type="file" name="image_file" id="imageFileInput" accept="image/*">
+
     <?php if (!empty($upload_error)): ?>
       <div style="color: red; margin-bottom: 1em;"> <?= htmlspecialchars($upload_error) ?> </div>
     <?php endif; ?>
     <?php if (!empty($add_error)): ?>
       <div style="color: red; margin-bottom: 1em;"> <?= htmlspecialchars($add_error) ?> </div>
     <?php endif; ?>
-    <div class="img-preview"></div>
+
     <button type="submit" class="submit-btn">Add Recipe</button>
     <a href="myrecipes.php" style="margin-left:1em;">Cancel</a>
   </form>
 </div>
-	 <!-- ✅ FULL-WIDTH FOOTER FIXED -->
+
+<!-- ✅ Footer -->
 <footer class="footer">
-  <!-- Remove the limiting .container -->
   <div class="footer-wrapper">
     <div class="footer-main">
       <div class="footer-col">
-        <a href="#" class="brand-title foot-brand login-required">Dish Diary</a>
+        <span class="foot-brand">Dish Diary</span>
         <p class="footer-desc">Discover, create, and share amazing recipes with food enthusiasts around the world.</p>
         <div class="footer-socials">
-          <a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a>
-          <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="ri-instagram-line"></i></a>
-          <a href="https://x.com/"><i class="ri-twitter-x-line"></i></a>
-          <a href="https://in.pinterest.com/"><i class="ri-pinterest-line"></i></a>
+          <a href="#"><i class="ri-facebook-fill"></i></a>
+          <a href="#"><i class="ri-instagram-line"></i></a>
+          <a href="#"><i class="ri-twitter-x-line"></i></a>
+          <a href="#"><i class="ri-pinterest-line"></i></a>
         </div>
       </div>
-
       <div class="footer-col">
         <h3>Quick Links</h3>
         <ul>
           <li><a href="index.php">Home</a></li>
-          <li><a href="recipes.php" class="login-required">Recipes</a></li>
-          <li><a href="categories.php" class="login-required">Categories</a></li>
+          <li><a href="recipes.php">Recipes</a></li>
+          <li><a href="categories.php">Categories</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#" class="login-required">Help Center</a></li>
-          <li><a href="#" class="login-required">Blog</a></li>
-          <li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Cooking Tips</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h3>Contact Us</h3>
         <ul>
-          <li><i class="ri-map-pin-line"></i>123 Recipe Street, Foodville, CA 90210</li>
-          <li><i class="ri-mail-line"></i><a href="mailto:info@dishdiary.com">info@dishdiary.com</a></li>
-          <li><i class="ri-phone-line"></i><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+          <li><i class="ri-map-pin-line"></i> 123 Recipe Street, Foodville, CA 90210</li>
+          <li><i class="ri-mail-line"></i> info@dishdiary.com</li>
+          <li><i class="ri-phone-line"></i> +1 (234) 567-890</li>
         </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2025 Dish Diary. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="#" class="login-required">Privacy Policy</a>
-        <a href="terms.php" class="login-required">Terms of Service</a>
-        <a href="#" class="login-required">Cookie Policy</a>
       </div>
     </div>
   </div>
 </footer>
-<!-- FOOTER END -->
+
 
 </body>
 </html>

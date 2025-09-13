@@ -445,7 +445,7 @@
                 <div class="option-description">Explore recipes, save favorites, and start cooking amazing dishes</div>
             </a>
             
-            <a href="admin_dashboard.php" class="option-card admin-card">
+            <a href="login.php" class="option-card admin-card">
                 <span class="option-icon">⚙️</span>
                 <div class="option-title">Admin</div>
                 <div class="option-description">Manage recipes, users, and system settings with full control</div>

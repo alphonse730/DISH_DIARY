@@ -2,8 +2,15 @@
 
 <?php
 session_start();
-$is_logged_in = isset($_SESSION['id']);
+
+if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
+    // User not logged in → show login modal instead of treating admin as user
+    $is_logged_in = false;
+} else {
+    $is_logged_in = true;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,7 +190,7 @@ $is_logged_in = isset($_SESSION['id']);
       <a href="categories.php" class="nav-link login-required">Categories</a>
       <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
       <a href="about.php" class="nav-link login-required">About</a>
-      <a href="contact.php" class="nav-link login-required">Contact</a>
+      <a href="feedback.php" class="nav-link login-required">feedback</a>
     </nav>
     <div class="nav-icons">
   <!-- Search icon removed as requested -->

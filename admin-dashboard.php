@@ -1,3 +1,4 @@
+<!-- admin-dashboard.php -->
 <?php
 session_start();
 include 'db.php';
@@ -122,7 +123,9 @@ $pendingRecipes = $conn->query("SELECT COUNT(*) AS total FROM recipes WHERE stat
     <li class="nav-item"><a href="admin-dashboard.php" class="nav-link active text-white">Dashboard</a></li>
     <li class="nav-item"><a href="manage-users.php" class="nav-link text-white">Manage Users</a></li>
     <li class="nav-item"><a href="manage-recipes.php" class="nav-link text-white">Manage Recipes</a></li>
-    <li class="nav-item"><a href="logout.php" class="nav-link text-danger">Logout</a></li>
+    <li class="nav-item"><a href="graphical-insights.php" class="nav-link text-white">Graphical Insights</a></li>
+    <li class="nav-item"><a href="admin-feedback.php" class="nav-link text-white">Feedback</a></li>
+    <li class="nav-item"><a href="user-admin.php" class="nav-link text-danger">Logout</a></li>
   </ul>
 </div>
 
@@ -176,22 +179,23 @@ $pendingRecipes = $conn->query("SELECT COUNT(*) AS total FROM recipes WHERE stat
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT r.id, r.title, r.status, u.username 
+        $sql = "SELECT r.recipe_id, r.title, r.status, u.name AS username 
                 FROM recipes r 
-                JOIN users u ON r.user_id = u.id 
+                JOIN users u ON r.id = u.id 
                 WHERE r.status='pending' 
-                ORDER BY r.id DESC LIMIT 5";
+                ORDER BY r.recipe_id DESC 
+                LIMIT 5";
         $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
             echo "<tr>
-                    <td>{$row['id']}</td>
+                    <td>{$row['recipe_id']}</td>
                     <td>{$row['title']}</td>
                     <td>{$row['username']}</td>
                     <td><span class='badge bg-warning'>{$row['status']}</span></td>
                     <td>
-                      <a href='approve-recipe.php?id={$row['id']}' class='btn btn-success btn-sm'>Approve</a>
-                      <a href='reject-recipe.php?id={$row['id']}' class='btn btn-danger btn-sm'>Reject</a>
+                      <a href='approve-recipe.php?id={$row['recipe_id']}' class='btn btn-success btn-sm'>Approve</a>
+                      <a href='reject-recipe.php?id={$row['recipe_id']}' class='btn btn-danger btn-sm'>Reject</a>
                     </td>
                   </tr>";
           }

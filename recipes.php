@@ -14,42 +14,37 @@ $sql = "
   FROM recipes r
   LEFT JOIN categories c ON r.category_id = c.category_id
   LEFT JOIN favorites f ON r.recipe_id = f.recipe_id AND f.user_id = $user_id
+  WHERE r.status = 'approved'
   ORDER BY r.title DESC
 ";
 $result = $conn->query($sql);
-?>
 
+// Helper for image path
+function recipe_img_src($img) {
+    $v = trim((string)$img);
+
+    if ($v === '') return 'no-image.png'; // fallback
+
+    // If DB already contains "uploads/"
+    if (stripos($v, 'uploads/') === 0) {
+        return htmlspecialchars($v);
+    }
+
+    // Otherwise assume it's just a filename
+    return 'uploads/' . rawurlencode(basename($v));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dish Diary - Recipes</title>
-   <link rel="stylesheet" href="recipes.css">
+  <link rel="stylesheet" href="recipes.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-  <style>
-    /* (keeping all your existing CSS unchanged, just showing relevant updates) */
-
-    .favorite-btn {
-      position: absolute;
-      right: 1.2rem;
-      bottom: 1.2rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      color: #ef9206;
-      transition: color 0.2s;
-      z-index: 2;
-    }
-    .favorite-btn.favorited i {
-      color: #d67b02;
-    }
-  </style>
 </head>
 <body>
 
@@ -68,8 +63,6 @@ $result = $conn->query($sql);
       <a href="contact.php" class="nav-link login-required">Contact</a>
     </nav>
     <div class="nav-icons">
-  <!-- Search icon removed as requested -->
-  <!-- Heart icon removed as requested -->
       <a href="profile.php" class="sign-in-btn">Profile</a>
       <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
@@ -87,20 +80,24 @@ $result = $conn->query($sql);
   <h1 class="page-title">All Recipes</h1>
   <div class="recipe-container">
     <?php while ($row = $result->fetch_assoc()): ?>
+      <?php $imgPath = recipe_img_src($row['image_url']); ?>
       <div class="recipe-card">
         <a href="detailedrecipe.php?recipe_id=<?= urlencode($row['recipe_id']) ?>" class="recipe-card-link">
-          <img src="<?= !empty($row['image_url']) ? htmlspecialchars($row['image_url']) : 'https://readdy.ai/api/search-image?query=food&width=400&height=300' ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+          <img src="<?= $imgPath ?>" 
+               alt="<?= htmlspecialchars($row['title']) ?>" 
+               class="recipe-img"
+               onerror="this.src='no-image.png'">
           <h2><?= htmlspecialchars($row['title']) ?></h2>
           <p><?= htmlspecialchars(mb_strimwidth($row['description'], 0, 80, '...')) ?></p>
           <span class="category"><?= htmlspecialchars($row['category_name']) ?></span>
         </a>
 
-        <!-- Heart button with dynamic state -->
-  <button class="favorite-btn <?= $row['is_favorited'] ? 'favorited' : '' ?>" 
-    data-recipe-id="<?= $row['recipe_id'] ?>" 
-    title="Toggle favorite">
-    <i class="<?= $row['is_favorited'] ? 'ri-heart-fill' : 'ri-heart-line' ?>"></i>
-  </button>
+        <!-- Heart button -->
+        <button class="favorite-btn <?= $row['is_favorited'] ? 'favorited' : '' ?>" 
+          data-recipe-id="<?= $row['recipe_id'] ?>" 
+          title="Toggle favorite">
+          <i class="<?= $row['is_favorited'] ? 'ri-heart-fill' : 'ri-heart-line' ?>"></i>
+        </button>
       </div>
     <?php endwhile; ?>
   </div>
@@ -164,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(data => {
         if (!data.success && data.message === "Not logged in") {
           alert("Please log in to favorite recipes!");
-          window.location.href = "login.php"; // redirect to login page
+          window.location.href = "login.php";
           return;
         }
 
