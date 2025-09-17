@@ -1,3 +1,7 @@
+<!-- category.php -->
+
+
+
 <?php
 if (!isset($_GET['category_id']) || !is_numeric($_GET['category_id'])) {
     die('Invalid category ID.');
@@ -20,6 +24,18 @@ $recipes->execute();
 $recipes_result = $recipes->get_result();
 $recipes->close();
 $conn->close();
+
+// ✅ Helper function for images
+function recipe_img_src($img) {
+    $v = trim((string)$img);
+    if ($v === '') return 'no-image.png'; // fallback
+
+    if (stripos($v, 'uploads/') === 0) {
+        return htmlspecialchars($v);
+    }
+
+    return 'uploads/' . rawurlencode(basename($v));
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,9 +68,10 @@ $conn->close();
     <h1 class="page-title">Category: <?= htmlspecialchars($category['category_name']) ?></h1>
     <div class="recipe-list">
         <?php while ($row = $recipes_result->fetch_assoc()): ?>
+            <?php $imgPath = recipe_img_src($row['image_url']); ?>
             <a href="detailedrecipe.php?recipe_id=<?= urlencode($row['recipe_id']) ?>" class="recipe-card-link">
                 <div class="recipe-card">
-                    <img src="<?= !empty($row['image_url']) ? htmlspecialchars($row['image_url']) : 'https://readdy.ai/api/search-image?query=food&width=400&height=300' ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                    <img src="<?= $imgPath ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                     <h2><?= htmlspecialchars($row['title']) ?></h2>
                     <p><?= htmlspecialchars(mb_strimwidth($row['description'], 0, 60, '...')) ?></p>
                 </div>

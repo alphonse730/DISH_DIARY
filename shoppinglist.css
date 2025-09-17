@@ -1,0 +1,101 @@
+shoppinglist.css
+/* shoppinglist.css */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #ff6f61;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.shopping-list {
+  list-style: none;
+  padding: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.shopping-list li {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s ease;
+}
+
+.shopping-list li:last-child {
+  border-bottom: none;
+}
+
+.shopping-list li:hover {
+  background: #fdf2f2;
+}
+
+input[type="checkbox"] {
+  margin-right: 12px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+label {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  background: #ff6f61;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+a:hover {
+  background: #e55b4f;
+}
+.pdf-btn {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.pdf-btn:hover {
+  background: #0056b3;
+}
+.pdf-btn {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.pdf-btn:hover {
+  background: #0056b3;
+}

@@ -18,6 +18,18 @@ $recipes->execute();
 $recipes_result = $recipes->get_result();
 $recipes->close();
 $conn->close();
+
+// ✅ Helper function for image path
+function recipe_img_src($img) {
+    $v = trim((string)$img);
+    if ($v === '') return 'no-image.png'; // fallback
+
+    if (stripos($v, 'uploads/') === 0) {
+        return htmlspecialchars($v);
+    }
+
+    return 'uploads/' . rawurlencode(basename($v));
+}
 ?>
 
 <!DOCTYPE html>
@@ -365,16 +377,14 @@ $conn->close();
     </div>
     <nav class="nav-menu" id="mainNav">
       <a href="index.php" class="nav-link">Home</a>
-  <a href="recipes.php" class="nav-link login-required">Recipes</a>
-  <a href="categories.php" class="nav-link login-required">Categories</a>
-  <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
-  <a href="about.php" class="nav-link login-required">About</a>
-  <a href="contact.php" class="nav-link login-required">Contact</a>
+      <a href="recipes.php" class="nav-link login-required">Recipes</a>
+      <a href="categories.php" class="nav-link login-required">Categories</a>
+      <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
+      <a href="about.php" class="nav-link login-required">About</a>
+      <a href="feedback.php" class="nav-link login-required">feedback</a>
     </nav>
     <div class="nav-icons">
-  <!-- Search icon removed as requested -->
-      
-        <a href="profile.php" class="sign-in-btn">Profile</a>
+      <a href="profile.php" class="sign-in-btn">Profile</a>
       <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
   </div>
@@ -383,12 +393,13 @@ $conn->close();
 <div class="container" style="margin-top: 3.5rem; margin-bottom: 2.5rem;">
   <div class="myrecipes-header">
     <div class="myrecipes-title">My Recipes</div>
-  <a href="addrecipe.php" class="add-recipe-btn"><i class="ri-add-line"></i>Add Recipe</a>
+    <a href="addrecipe.php" class="add-recipe-btn"><i class="ri-add-line"></i>Add Recipe</a>
   </div>
   <div class="myrecipes-list">
     <?php while ($row = $recipes_result->fetch_assoc()): ?>
+      <?php $imgPath = recipe_img_src($row['image_url']); ?>
       <div class="myrecipe-card">
-        <img src="<?= !empty($row['image_url']) ? htmlspecialchars($row['image_url']) : 'https://readdy.ai/api/search-image?query=food&width=400&height=300' ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="myrecipe-img">
+        <img src="<?= $imgPath ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="myrecipe-img">
         <div class="myrecipe-content">
           <div class="myrecipe-title"><?= htmlspecialchars($row['title']) ?></div>
           <div class="myrecipe-desc"><?= htmlspecialchars(mb_strimwidth($row['description'], 0, 80, '...')) ?></div>
@@ -405,10 +416,7 @@ $conn->close();
   </div>
 </div>
 
-
-	 <!-- ✅ FULL-WIDTH FOOTER FIXED -->
 <footer class="footer">
-  <!-- Remove the limiting .container -->
   <div class="footer-wrapper">
     <div class="footer-main">
       <div class="footer-col">
@@ -460,7 +468,5 @@ $conn->close();
     </div>
   </div>
 </footer>
-<!-- FOOTER END -->
-
 </body>
 </html>

@@ -1,5 +1,6 @@
+<!-- logout.php -->
 <?php
-// logout.php
+
 session_start(); // Start the session
 
 // Unset all session variables

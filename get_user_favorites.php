@@ -1,3 +1,6 @@
+<!-- get_user_favorites.php -->
+
+
 <?php
 include 'db.php';
 session_start();

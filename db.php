@@ -1,3 +1,8 @@
+<!-- db.php -->
+
+
+
+
 <?php
 $servername = "localhost";
 $username   = "root";   // default for XAMPP

@@ -1,5 +1,6 @@
+<!-- login.php -->
 <?php
-// login.php
+
 session_start();
 $success = "";
 $error = "";
@@ -37,15 +38,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Invalid password.";
       }
     } else {
-            $error = "No account found with that email.";
-        }
-
-        $stmt->close();
-    } else {
-        $error = "Database query failed.";
+      $error = "No account found with that email.";
     }
 
-    $conn->close();
+    $stmt->close();
+  } else {
+    $error = "Database query failed.";
+  }
+
+  $conn->close();
 }
 ?>
 <!DOCTYPE html>
@@ -71,8 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <?= htmlspecialchars($error) ?>
         </p>
       <?php endif; ?>
-
-      
 
       <div class="input-group">
         <label for="email">Email</label>
@@ -106,7 +105,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Don't have an account?
         <a href="signup.php">Register Now</a>
       </div>
-       <!-- Back to Home Button -->
+
+      <!-- Back to Home Button -->
       <div style="text-align: center; margin-bottom: 15px;">
         <a href="index.php" class="back-home-btn" style="display: inline-block; background:#f5f5f5; color:#333; padding:8px 22px; border-radius:24px; text-decoration:none; font-weight:600; box-shadow:0 0 6px #eee; transition:background 0.2s;">
           <i class="ri-arrow-left-line" style="vertical-align:middle; margin-right:6px;"></i>
@@ -117,16 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
 
   <script>
-    document.getElementById('userBtn').onclick = function () {
-      this.classList.add('active');
-      document.getElementById('adminBtn').classList.remove('active');
-    };
-
-    document.getElementById('adminBtn').onclick = function () {
-      this.classList.add('active');
-      document.getElementById('userBtn').classList.remove('active');
-    };
-
+    // Show / Hide password toggle
     document.querySelector('.toggle-password').onclick = function () {
       const pwd = document.getElementById('password');
       if (pwd.type === 'password') {

@@ -387,6 +387,63 @@ $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) 
       background: #ffe0b2;
       box-shadow: 0 4px 12px rgba(239,146,6,0.12);
     }
+    .shopping-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7em;
+      margin-top: 18px;
+      padding: 10px 22px 10px 18px;
+      background: linear-gradient(90deg, #ff6b35 0%, #f7931e 100%);
+      color: #fff;
+      border: none;
+      border-radius: 32px;
+      font-size: 1.13em;
+      font-weight: 600;
+      box-shadow: 0 4px 18px #ff6b6b22;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+      width: auto;
+      min-width: 0;
+      max-width: 100%;
+    }
+    .shopping-btn::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, #f7931e 0%, #ff6b35 100%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 0;
+      border-radius: 32px;
+    }
+    .shopping-btn:hover::before {
+      opacity: 0.18;
+    }
+    .shopping-btn:hover {
+      background: linear-gradient(90deg, #f7931e 0%, #ff6b35 100%);
+      box-shadow: 0 8px 32px #ff6b6b33;
+      transform: translateY(-2px) scale(1.03);
+    }
+    .shopping-btn .ri-shopping-cart-2-line {
+      font-size: 1.3em;
+      margin-right: 0.2em;
+      vertical-align: middle;
+    }
+    @media (max-width: 600px) {
+      .shopping-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 1em;
+        padding: 12px 0;
+        min-width: unset;
+        max-width: unset;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -457,6 +514,8 @@ $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) 
    
     <p><strong>Uploaded by:</strong> <?= htmlspecialchars($recipe['user_name']) ?></p>
   </div>
+  <a href="shoppinglist.php?recipe_id=<?= $recipe_id ?>" class="shopping-btn"><i class="ri-shopping-cart-2-line"></i>Shopping List</a>
+
   	 <!-- ✅ FULL-WIDTH FOOTER FIXED -->
 <footer class="footer">
   <!-- Remove the limiting .container -->

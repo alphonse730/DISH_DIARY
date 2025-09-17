@@ -1,3 +1,5 @@
+<!-- manage-recipes.php -->
+
 <?php
 session_start();
 include 'db.php'; // adjust if needed

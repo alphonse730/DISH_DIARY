@@ -1,3 +1,8 @@
+<!-- favorites.php -->
+
+
+
+
 <?php
 session_start();
 include 'db.php';
@@ -30,12 +35,34 @@ $result = $stmt->get_result();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Favorites - Dish Diary</title>
   <link rel="stylesheet" href="favorites.css">
+  <link rel="stylesheet" href="recipes.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <h1>My Favorite Recipes ❤️</h1>
-    <a href="index.php" class="back-btn">← Back to Home</a>
+  <!-- NAVBAR START -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="brand">
+        <a href="index.php" class="brand-title">Dish Diary</a>
+      </div>
+      <nav class="nav-menu" id="mainNav">
+        <a href="index.php" class="nav-link">Home</a>
+        <a href="recipes.php" class="nav-link login-required">Recipes</a>
+        <a href="categories.php" class="nav-link login-required">Categories</a>
+        <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
+        <a href="about.php" class="nav-link login-required">About</a>
+        <a href="contact.php" class="nav-link login-required">Contact</a>
+      </nav>
+      <div class="nav-icons">
+        <a href="profile.php" class="sign-in-btn">Profile</a>
+        <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
+      </div>
+    </div>
   </header>
+  <!-- NAVBAR END -->
 
   <main class="favorites-container">
     <?php if ($result->num_rows > 0): ?>
@@ -57,5 +84,47 @@ $result = $stmt->get_result();
       <p class="empty-msg">💔 You haven’t added any favorites yet.</p>
     <?php endif; ?>
   </main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-wrapper">
+    <div class="footer-main">
+      <div class="footer-col">
+        <span class="foot-brand">Dish Diary</span>
+        <p class="footer-desc">Discover, create, and share amazing recipes with food enthusiasts around the world.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="ri-facebook-fill"></i></a>
+          <a href="#"><i class="ri-instagram-line"></i></a>
+          <a href="#"><i class="ri-twitter-x-line"></i></a>
+          <a href="#"><i class="ri-pinterest-line"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="recipes.php">Recipes</a></li>
+          <li><a href="categories.php">Categories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Cooking Tips</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="ri-map-pin-line"></i> 123 Recipe Street, Foodville, CA 90210</li>
+          <li><i class="ri-mail-line"></i> info@dishdiary.com</li>
+          <li><i class="ri-phone-line"></i> +1 (234) 567-890</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

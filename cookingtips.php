@@ -1,3 +1,7 @@
+<!-- cookingtips.php -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -727,7 +731,7 @@
   <a href="categories.php" class="nav-link login-required">Categories</a>
   <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
   <a href="about.php" class="nav-link login-required">About</a>
-  <a href="contact.php" class="nav-link login-required">Contact</a>
+  <a href="feedback.php" class="nav-link login-required">feedback</a>
     </nav>
     <div class="nav-icons">
   <!-- Search icon removed as requested -->

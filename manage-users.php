@@ -1,3 +1,6 @@
+<!-- manage-users.php -->
+
+
 <?php
 session_start();
 include 'db.php'; // adjust path if needed

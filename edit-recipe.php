@@ -1,3 +1,9 @@
+<!-- edit-recipe.php -->
+ 
+ <!-- admins edit recipe -->
+
+
+
 <?php
 session_start();
 include 'db.php'; // adjust if needed

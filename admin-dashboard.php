@@ -9,6 +9,15 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
+// ✅ Fetch admin name using session id
+$adminId = $_SESSION['id'];
+$stmt = $conn->prepare("SELECT name FROM users WHERE id = ?");
+$stmt->bind_param("i", $adminId);
+$stmt->execute();
+$result = $stmt->get_result();
+$admin = $result->fetch_assoc();
+$adminName = $admin ? $admin['name'] : "Admin";
+
 // Fetch some quick stats
 $totalUsers = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'];
 $totalRecipes = $conn->query("SELECT COUNT(*) AS total FROM recipes")->fetch_assoc()['total'];
@@ -131,7 +140,7 @@ $pendingRecipes = $conn->query("SELECT COUNT(*) AS total FROM recipes WHERE stat
 
 <!-- Main Content -->
 <div class="main-content">
-  <h2>Welcome, Admin 👋</h2>
+  <h2>Welcome, <?php echo htmlspecialchars($adminName); ?> 👋</h2>
   <hr>
 
   <!-- Stats Cards -->
