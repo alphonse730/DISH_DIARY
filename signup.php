@@ -44,14 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Insert user with default role
             $insert = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
             $insert->bind_param("ssss", $name, $email, $hashed_password, $role);
-
-           if ($insert->execute()) {
-    $success = "<div class='success-message'>Signup successful! <a href='login.php'>Click here to login</a></div>";
-}
-else {
-                $error = "Something went wrong. Try again.";
-            }
-            $insert->close();
+       if ($insert->execute()) {
+        // Redirect to login.php after signup
+        header('Location: login.php?signup=success');
+        exit();
+      } else {
+        $error = "Something went wrong. Try again.";
+      }
+      $insert->close();
         }
 
         $stmt->close();

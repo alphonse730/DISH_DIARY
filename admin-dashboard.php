@@ -138,8 +138,29 @@ $pendingRecipes = $conn->query("SELECT COUNT(*) AS total FROM recipes WHERE stat
   </ul>
 </div>
 
+
 <!-- Main Content -->
 <div class="main-content">
+  <script>
+    <?php if (isset($_GET['approved']) && $_GET['approved'] == '1'): ?>
+      alert('Recipe approved successfully!');
+      console.log('Recipe approved: The recipe was successfully approved by the admin.');
+      if (window.history.replaceState) {
+        const url = new URL(window.location);
+        url.searchParams.delete('approved');
+        window.history.replaceState({}, document.title, url.pathname + url.search);
+      }
+    <?php endif; ?>
+    <?php if (isset($_GET['rejected']) && $_GET['rejected'] == '1'): ?>
+      alert('Recipe rejected.❌');
+      console.log('Recipe rejected: The recipe was rejected by the admin.');
+      if (window.history.replaceState) {
+        const url = new URL(window.location);
+        url.searchParams.delete('rejected');
+        window.history.replaceState({}, document.title, url.pathname + url.search);
+      }
+    <?php endif; ?>
+  </script>
   <h2>Welcome, <?php echo htmlspecialchars($adminName); ?> 👋</h2>
   <hr>
 

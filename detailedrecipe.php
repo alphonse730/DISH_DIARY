@@ -443,6 +443,12 @@ $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) 
         max-width: unset;
       }
     }
+    .shopping-btn-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 18px 0 0 0;
+    }
 
   </style>
 </head>
@@ -514,7 +520,10 @@ $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) 
    
     <p><strong>Uploaded by:</strong> <?= htmlspecialchars($recipe['user_name']) ?></p>
   </div>
-  <a href="shoppinglist.php?recipe_id=<?= $recipe_id ?>" class="shopping-btn"><i class="ri-shopping-cart-2-line"></i>Shopping List</a>
+  <div class="shopping-btn-center">
+    <a href="shoppinglist.php?recipe_id=<?= $recipe_id ?>" class="shopping-btn"><i class="ri-shopping-cart-2-line"></i>Shopping List</a>
+  </div>
+    
 
   	 <!-- ✅ FULL-WIDTH FOOTER FIXED -->
 <footer class="footer">

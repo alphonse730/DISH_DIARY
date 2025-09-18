@@ -7,22 +7,24 @@ include 'db.php'; // adjust path if needed
 
 // Handle role update
 if (isset($_POST['update_role'])) {
-    $user_id = intval($_POST['user_id']);
-    $role = $_POST['role'];
+  $user_id = intval($_POST['user_id']);
+  $role = $_POST['role'];
 
-    $stmt = $conn->prepare("UPDATE users SET role = ? WHERE id = ?");
-    $stmt->bind_param("si", $role, $user_id);
-    $stmt->execute();
+  $stmt = $conn->prepare("UPDATE users SET role = ? WHERE id = ?");
+  $stmt->bind_param("si", $role, $user_id);
+  $stmt->execute();
+  header("Location: manage-users.php?msg=role");
+  exit();
 }
 
 // Handle delete user
 if (isset($_GET['delete'])) {
-    $user_id = intval($_GET['delete']);
-    $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    header("Location: manage-users.php");
-    exit();
+  $user_id = intval($_GET['delete']);
+  $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
+  $stmt->bind_param("i", $user_id);
+  $stmt->execute();
+  header("Location: manage-users.php?msg=deleted");
+  exit();
 }
 
 // Fetch users
@@ -140,7 +142,7 @@ $result = $conn->query("SELECT * FROM users ORDER BY id DESC");
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
-        <th>Profile Image</th>
+        
         <th>Actions</th>
       </tr>
     </thead>
@@ -160,13 +162,7 @@ $result = $conn->query("SELECT * FROM users ORDER BY id DESC");
             <button type="submit" name="update_role" class="btn btn-sm btn-primary">Update</button>
           </form>
         </td>
-        <td>
-          <?php if ($row['profile_img']): ?>
-            <img src="../uploads/<?= $row['profile_img'] ?>" width="50" class="rounded">
-          <?php else: ?>
-            N/A
-          <?php endif; ?>
-        </td>
+       
         <td>
           <a href="manage-users.php?delete=<?= $row['id'] ?>" 
              onclick="return confirm('Are you sure you want to delete this user?')" 
@@ -176,6 +172,16 @@ $result = $conn->query("SELECT * FROM users ORDER BY id DESC");
       <?php endwhile; ?>
     </tbody>
   </table>
+</table>
+<script>
+  // Show alert for role update or delete
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('msg') === 'deleted') {
+    alert('User deleted successfully!');
+  } else if (urlParams.get('msg') === 'role') {
+    alert('User role updated successfully!');
+  }
+</script>
 </div>
 </body>
 </html>

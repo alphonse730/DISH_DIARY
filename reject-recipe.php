@@ -13,5 +13,5 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $recipe_id);
 $stmt->execute();
 $stmt->close();
-header('Location: admin-dashboard.php');
+header('Location: admin-dashboard.php?rejected=1');
 exit();

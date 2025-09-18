@@ -345,10 +345,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
                 </span>
               </div>
               <div class="recipe-footer">
-                <div class="author">
-                  <img src="https://readdy.ai/api/search-image?query=chef&width=50&height=50" alt="Chef">
-                  <span><?= !empty($row['user_name']) ? htmlspecialchars($row['user_name']) : 'Unknown Chef' ?></span>
-                </div>
+               
                 <a href="detailedrecipe.php?recipe_id=<?= urlencode($row['recipe_id']) ?>" 
                    class="view-recipe-link login-required">View Recipe</a>
               </div>
@@ -388,7 +385,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
         <h2>Ready to Start Your Culinary Journey?</h2>
         <p>Join thousands of food enthusiasts who are discovering, creating, and sharing amazing recipes every day.</p>
         <div class="cta-btn-group">
-          <a href="signup.php" class="cta-btn-primary">Sign Up for Free</a>
+          <a href="cookingtips.php" class="cta-btn-primary">Cooking Tips </a>
           <a href="about.php" class="cta-btn-outline login-required">Learn More</a>
         </div>
       </div>

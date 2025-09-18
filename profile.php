@@ -13,13 +13,13 @@ $conn = new mysqli('localhost', 'root', '', 'dish_diary');
 if ($conn->connect_error) {
   die('Database connection failed: ' . $conn->connect_error);
 }
-$stmt = $conn->prepare('SELECT name, email FROM users WHERE id = ?');
+$stmt = $conn->prepare('SELECT name, email, profile_img FROM users WHERE id = ?');
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
-$stmt->bind_result($username, $email);
+$stmt->bind_result($username, $email, $profile_img);
 $stmt->fetch();
 $stmt->close();
-$conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +29,7 @@ $conn->close();
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    
 
     /* NAVBAR CSS START */
      header.navbar {
@@ -381,9 +382,22 @@ $conn->close();
   <div class="profile-container">
     <h2 style="font-family: var(--font-brand); color: var(--primary); margin-bottom: 2rem;">My Profile</h2>
     <div class="profile-card">
-      <div class="profile-avatar">
-        <i class="ri-user-3-fill"></i>
-      </div>
+     <div class="profile-avatar">
+  <?php if (!empty($profile_img)) { ?>
+    <img src="uploads/<?php echo htmlspecialchars($profile_img); ?>" 
+         alt="Profile Picture" 
+         style="width:90px; height:90px; border-radius:50%; object-fit:cover;">
+  <?php } else { ?>
+    <i class="ri-user-3-fill"></i>
+  <?php } ?>
+</div>
+<form action="update_profile.php" method="post" enctype="multipart/form-data" style="margin-top: 1rem;">
+  <input type="file" name="profile_pic" accept="image/*" required>
+  <button type="submit" style="padding:0.5em 1em; background:#ff6b35; color:#fff; border:none; border-radius:6px; cursor:pointer;">
+    Edit
+  </button>
+</form>
+
       <div class="profile-info">
         <div class="profile-row"><span class="profile-label">Username:</span> <span><?php echo htmlspecialchars($username); ?></span></div>
         <div class="profile-row"><span class="profile-label">Email:</span> <span><?php echo htmlspecialchars($email); ?></span></div>

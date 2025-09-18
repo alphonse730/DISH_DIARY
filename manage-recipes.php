@@ -7,24 +7,24 @@ include 'db.php'; // adjust if needed
 
 // Handle delete recipe
 if (isset($_GET['delete'])) {
-    $recipe_id = intval($_GET['delete']);
-    $stmt = $conn->prepare("DELETE FROM recipes WHERE recipe_id = ?");
-    $stmt->bind_param("i", $recipe_id);
-    $stmt->execute();
-    header("Location: manage-recipes.php");
-    exit();
+  $recipe_id = intval($_GET['delete']);
+  $stmt = $conn->prepare("DELETE FROM recipes WHERE recipe_id = ?");
+  $stmt->bind_param("i", $recipe_id);
+  $stmt->execute();
+  header("Location: manage-recipes.php?msg=deleted");
+  exit();
 }
 
 // Handle inline status update
 if (isset($_POST['update_status'])) {
-    $recipe_id = intval($_POST['recipe_id']);
-    $status = $_POST['status'];
+  $recipe_id = intval($_POST['recipe_id']);
+  $status = $_POST['status'];
 
-    $stmt = $conn->prepare("UPDATE recipes SET status=? WHERE recipe_id=?");
-    $stmt->bind_param("si", $status, $recipe_id);
-    $stmt->execute();
-    header("Location: manage-recipes.php");
-    exit();
+  $stmt = $conn->prepare("UPDATE recipes SET status=? WHERE recipe_id=?");
+  $stmt->bind_param("si", $status, $recipe_id);
+  $stmt->execute();
+  header("Location: manage-recipes.php?msg=status");
+  exit();
 }
 
 // Fetch recipes with user info
@@ -185,7 +185,6 @@ $result = $conn->query($sql);
           </form>
         </td>
         <td>
-          <a href="edit-recipe.php?recipe_id=<?= $row['recipe_id'] ?>" class="btn btn-sm btn-primary">Edit</a>
           <a href="manage-recipes.php?delete=<?= $row['recipe_id'] ?>" 
              onclick="return confirm('Are you sure you want to delete this recipe?')" 
              class="btn btn-sm btn-danger">Delete</a>
@@ -195,6 +194,20 @@ $result = $conn->query($sql);
     </tbody>
   </table>
 </div>
+<script>
+  // Show alert for status update or delete
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('msg') === 'deleted') {
+    alert('Recipe deleted successfully!');
+  } else if (urlParams.get('msg') === 'status') {
+    alert('Recipe status updated successfully!');
+  }
+  // Show alert for edit
+  if (localStorage.getItem('editMsg') === '1') {
+    alert('Redirecting to edit recipe page...');
+    localStorage.removeItem('editMsg');
+  }
+</script>
 </body>
 </html>
 </body>
