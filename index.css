@@ -1,3 +1,143 @@
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+  .nav-menu.active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    right: 1rem;
+    background: #fff;
+    gap: 1.5rem;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    z-index: 100;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+  .nav-menu.active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    right: 1rem;
+    background: #fff;
+    gap: 1.5rem;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    z-index: 100;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+  .nav-menu.active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    right: 1rem;
+    background: #fff;
+    gap: 1.5rem;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    z-index: 100;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+/* --- Strong Mobile-First Overrides for Main Sections --- */
+@media (max-width: 600px) {
+  .navbar, .container.nav-container {
+    flex-direction: column !important;
+    height: auto !important;
+    padding: 0 5px !important;
+    gap: 0.5rem !important;
+  }
+  .nav-menu {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .brand-title {
+    font-size: 1.1rem;
+  }
+  .hero-section {
+    padding: 18px 2vw 12px 2vw;
+  }
+  .hero-content {
+    padding: 0;
+    text-align: center;
+  }
+  .search-bar form {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5em !important;
+  }
+  .categories-grid, .featured-grid, .how-grid {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+    gap: 1.2rem;
+  }
+  .category-card, .recipe-card, .how-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+  .recipe-img-wrap img, .category-card img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover;
+  }
+  .cta-section {
+    padding: 18px 2vw;
+  }
+  .cta-wrap {
+    flex-direction: column !important;
+    gap: 1.2rem !important;
+  }
+  .cta-content, .cta-image {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+  .footer-main {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    text-align: center !important;
+  }
+  .footer-links {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    align-items: center !important;
+  }
+  .footer-col ul {
+    padding-left: 0 !important;
+  }
+  .footer-col li {
+    font-size: 0.98em !important;
+  }
+}
 /* index.css */
 
 

@@ -201,7 +201,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
         <a href="signup.php" class="sign-in-btn">Signup</a>
         <a href="login.php" class="sign-in-btn">Login</a>
       <?php endif; ?>
-      <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
+    
     </div>
   </div>
 </header>
@@ -371,7 +371,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
     </div>
     <div class="how-grid">
       <div class="how-card"><div class="how-icon"><i class="ri-search-line"></i></div><h3>Discover Recipes</h3><p>Browse thousands of recipes...</p></div>
-      <div class="how-card"><div class="how-icon"><i class="ri-book-open-line"></i></div><h3>Create Recipe Books</h3><p>Save your favorite recipes...</p></div>
+      <div class="how-card"><div class="how-icon"><i class="ri-book-open-line"></i></div><h3>Favorite Recipe</h3><p>Save your favorite recipes...</p></div>
       <div class="how-card"><div class="how-icon"><i class="ri-share-line"></i></div><h3>Share Your Creations</h3><p>Upload your own recipes...</p></div>
     </div>
   </div>
@@ -416,7 +416,11 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
         <ul><li><a href="index.php">Home</a></li><li><a href="recipes.php" class="login-required">Recipes</a></li><li><a href="categories.php" class="login-required">Categories</a></li></ul>
       </div>
       <div class="footer-col"><h3>Resources</h3>
-        <ul><li><a href="#" class="login-required">Help Center</a></li><li><a href="#" class="login-required">Blog</a></li><li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li></ul>
+        <ul>
+          <li><a href="feedback.php" class="login-required">Feedback</a></li>
+          <li><a href="about.php" class="login-required">About</a></li>
+          <li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li>
+        </ul>
       </div>
       <div class="footer-col"><h3>Contact Us</h3>
         <ul><li><i class="ri-map-pin-line"></i>123 Recipe Street, Foodville</li><li><i class="ri-mail-line"></i><a href="mailto:info@dishdiary.com">info@dishdiary.com</a></li><li><i class="ri-phone-line"></i><a href="tel:+1234567890">+1 (234) 567-890</a></li></ul>

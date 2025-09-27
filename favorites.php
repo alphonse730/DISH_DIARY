@@ -40,6 +40,19 @@ $result = $stmt->get_result();
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile navbar toggle
+        var menuBtn = document.getElementById('mobileMenuBtn');
+        var navMenu = document.getElementById('mainNav');
+        if(menuBtn && navMenu) {
+          menuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            navMenu.classList.toggle('active');
+          });
+        }
+      });
+    </script>
 </head>
 <body>
   <!-- NAVBAR START -->
@@ -54,7 +67,7 @@ $result = $stmt->get_result();
         <a href="categories.php" class="nav-link login-required">Categories</a>
         <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
         <a href="about.php" class="nav-link login-required">About</a>
-        <a href="contact.php" class="nav-link login-required">Contact</a>
+        <a href="feedback.php" class="nav-link login-required">Feedback</a>
       </nav>
       <div class="nav-icons">
         <a href="profile.php" class="sign-in-btn">Profile</a>
@@ -110,9 +123,9 @@ $result = $stmt->get_result();
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Cooking Tips</a></li>
+          <li><a href="feedback.php">Feedback</a></li>
+          <li><a href="about.php">About</a></li>
+          <li><a href="cookingtips.php">Cooking Tips</a></li>
         </ul>
       </div>
       <div class="footer-col">

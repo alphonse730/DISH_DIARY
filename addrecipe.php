@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="categories.php" class="nav-link">Categories</a>
       <a href="cookingtips.php" class="nav-link">Cooking Tips</a>
       <a href="about.php" class="nav-link">About</a>
-      <a href="contact.php" class="nav-link">Contact</a>
+      <a href="feedback.php" class="nav-link">Feedback</a>
     </nav>
     <a href="profile.php" class="sign-in-btn">Profile</a>
   </div>
@@ -269,8 +269,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="feedback.php">Feedback</a></li>
+          <li><a href="about.php">About</a></li>
           <li><a href="cookingtips.php">Cooking Tips</a></li>
         </ul>
       </div>

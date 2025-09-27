@@ -1,3 +1,24 @@
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+  .nav-menu.active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    right: 1rem;
+    background: #fff;
+    gap: 1.5rem;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    z-index: 100;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
 /* favorites.css */
 
 

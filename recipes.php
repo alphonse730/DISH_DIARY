@@ -60,7 +60,7 @@ function recipe_img_src($img) {
       <a href="categories.php" class="nav-link login-required">Categories</a>
       <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
       <a href="about.php" class="nav-link login-required">About</a>
-      <a href="contact.php" class="nav-link login-required">Contact</a>
+      <a href="feedback.php" class="nav-link login-required">Feedback</a>
     </nav>
     <div class="nav-icons">
       <a href="profile.php" class="sign-in-btn">Profile</a>
@@ -128,9 +128,9 @@ function recipe_img_src($img) {
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Cooking Tips</a></li>
+          <li><a href="feedback.php">Feedback</a></li>
+          <li><a href="about.php">About</a></li>
+          <li><a href="cookingtips.php">Cooking Tips</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -180,6 +180,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(error => console.error("Error:", error));
     });
   });
+  // Mobile navbar toggle
+  var menuBtn = document.getElementById('mobileMenuBtn');
+  var navMenu = document.getElementById('mainNav');
+  if(menuBtn && navMenu) {
+    menuBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      navMenu.classList.toggle('active');
+    });
+  }
 });
 </script> 
 </body>

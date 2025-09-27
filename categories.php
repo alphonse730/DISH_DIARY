@@ -364,6 +364,20 @@ $categories = $conn->query("SELECT * FROM categories ORDER BY category_name ASC"
 
 
     </style>
+</style>
+<script>
+  // Hamburger menu toggle for mobile nav
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    if (mobileMenuBtn && mainNav) {
+      mobileMenuBtn.addEventListener('click', function() {
+        mainNav.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+      });
+    }
+  });
+</script>
 </head>
 <body>
 
@@ -374,19 +388,19 @@ $categories = $conn->query("SELECT * FROM categories ORDER BY category_name ASC"
     <div class="brand">
       <a href="index.php" class="brand-title">Dish Diary</a>
     </div>
+    
     <nav class="nav-menu" id="mainNav">
       <a href="index.php" class="nav-link">Home</a>
-  <a href="recipes.php" class="nav-link login-required">Recipes</a>
-  <a href="categories.php" class="nav-link login-required">Categories</a>
-  <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
-  <a href="about.php" class="nav-link login-required">About</a>
-  <a href="feedback.php" class="nav-link login-required">feedback</a>
+      <a href="recipes.php" class="nav-link login-required">Recipes</a>
+      <a href="categories.php" class="nav-link login-required">Categories</a>
+      <a href="cookingtips.php" class="nav-link login-required">Cooking Tips</a>
+      <a href="about.php" class="nav-link login-required">About</a>
+      <a href="feedback.php" class="nav-link login-required">feedback</a>
     </nav>
     <div class="nav-icons">
   <!-- Search icon removed as requested -->
-      
-        <a href="profile.php" class="sign-in-btn">Profile</a>
-      <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
+  <a href="profile.php" class="sign-in-btn">Profile</a>
+  <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
     </div>
   </div>
 </header>

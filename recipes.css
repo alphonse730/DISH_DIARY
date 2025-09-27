@@ -1,3 +1,61 @@
+/* --- Strong Mobile-First Overrides for Recipes Page --- */
+@media (max-width: 600px) {
+  .navbar, .container.nav-container {
+    flex-direction: column !important;
+    height: auto !important;
+    padding: 0 5px !important;
+    gap: 0.5rem !important;
+  }
+  .nav-menu {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .brand-title {
+    font-size: 1.1rem;
+  }
+  .page-title {
+    font-size: 1.3rem !important;
+    padding: 0.5em 0;
+  }
+  .recipe-container {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+    padding: 8px !important;
+  }
+  .recipe-card, .category-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+  .recipe-card img, .recipe-img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover;
+  }
+  .footer-main, .footer-wrapper {
+    flex-direction: column !important;
+    gap: 1.2rem !important;
+    align-items: stretch !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    text-align: center !important;
+  }
+  .footer-links {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    align-items: center !important;
+  }
+  .footer-col ul {
+    padding-left: 0 !important;
+  }
+  .footer-col li {
+    font-size: 0.98em !important;
+  }
+}
 /* recipes.css */
     /* ====== NAVBAR CSS START ====== */
     header.navbar {

@@ -737,7 +737,7 @@
   <!-- Search icon removed as requested -->
       
      <a href="profile.php" class="sign-in-btn">Profile</a>
-      <div class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><i class="ri-menu-line ri-lg"></i></div>
+
     </div>
   </div>
 </header>

@@ -215,6 +215,15 @@ $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) 
      /* FOOTER  CSS START*/
    /* ===== Footer (solid, full-width, dark) ===== */
 .footer{
+      // Mobile navbar toggle
+      var menuBtn = document.getElementById('mobileMenuBtn');
+      var navMenu = document.getElementById('mainNav');
+      if(menuBtn && navMenu) {
+        menuBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          navMenu.classList.toggle('active');
+        });
+      }
   width:100vw;
   margin-left:calc(-50vw + 50%);   /* full-bleed */
   background:#1f2937;              /* solid slate/navy */
@@ -553,8 +562,8 @@ $imgSrc = !empty($recipe['image_url']) ? htmlspecialchars($recipe['image_url']) 
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#" class="login-required">Help Center</a></li>
-          <li><a href="#" class="login-required">Blog</a></li>
+          <li><a href="feedback.php" class="login-required">Feedback</a></li>
+          <li><a href="about.php" class="login-required">About</a></li>
           <li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li>
         </ul>
       </div>
