@@ -90,14 +90,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
 
-      <div class="options-row">
+      <!-- <div class="options-row">
         <label class="remember-me">
           <input type="checkbox">
           <span class="custom-checkbox"></span>
           Remember me
         </label>
         <a href="#" class="forgot-link">Forgot Password?</a>
-      </div>
+      </div> -->
+      <br>
 
       <button type="submit" class="login-btn">Log In</button>
 
