@@ -133,7 +133,7 @@ $pendingRecipes = $conn->query("SELECT COUNT(*) AS total FROM recipes WHERE stat
     <li class="nav-item"><a href="manage-users.php" class="nav-link text-white">Manage Users</a></li>
     <li class="nav-item"><a href="manage-recipes.php" class="nav-link text-white">Manage Recipes</a></li>
     <li class="nav-item"><a href="graphical-insights.php" class="nav-link text-white">Graphical Insights</a></li>
-    <li class="nav-item"><a href="admin-feedback.php" class="nav-link text-white">Feedback</a></li>
+    <li class="nav-item"><a href="admin-feedback.php" class="nav-link text-white">View Feedback</a></li>
     <li class="nav-item"><a href="user-admin.php" class="nav-link text-danger">Logout</a></li>
   </ul>
 </div>
