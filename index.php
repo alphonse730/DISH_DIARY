@@ -385,7 +385,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
         <h2>Ready to Start Your Culinary Journey?</h2>
         <p>Join thousands of food enthusiasts who are discovering, creating, and sharing amazing recipes every day.</p>
         <div class="cta-btn-group">
-          <a href="cookingtips.php" class="cta-btn-primary">Cooking Tips </a>
+          <a href="cookingtips.php" class="cta-btn-primary login-required">Cooking Tips </a>
           <a href="about.php" class="cta-btn-outline login-required">Learn More</a>
         </div>
       </div>
@@ -407,7 +407,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'user') {
         <p class="footer-desc">Discover, create, and share amazing recipes with food enthusiasts around the world.</p>
         <div class="footer-socials">
           <a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a>
-          <a href="https://www.instagram.com/"><i class="ri-instagram-line"></i></a>
+          <a href="https://www.instagram.com/dish__diary?igsh=MWZkdTh3M2huaHI2dw%3D%3D&utm_source=qr/"><i class="ri-instagram-line"></i></a>
           <a href="https://x.com/"><i class="ri-twitter-x-line"></i></a>
           <a href="https://in.pinterest.com/"><i class="ri-pinterest-line"></i></a>
         </div>
