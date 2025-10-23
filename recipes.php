@@ -77,6 +77,7 @@ function recipe_img_src($img) {
 </div>
 
 <main>
+  <!--card based format for each recipe-->
   <h1 class="page-title">All Recipes</h1>
   <div class="recipe-container">
     <?php while ($row = $result->fetch_assoc()): ?>

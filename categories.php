@@ -406,7 +406,7 @@ $categories = $conn->query("SELECT * FROM categories ORDER BY category_name ASC"
 </header>
 <!-- navbar end -->
 
-
+<!--category card-->
     <h1 class="page-title">All Categories</h1>
     <div class="category-list">
         <?php while ($cat = $categories->fetch_assoc()): ?>
@@ -444,8 +444,8 @@ $categories = $conn->query("SELECT * FROM categories ORDER BY category_name ASC"
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#" class="login-required">Help Center</a></li>
-          <li><a href="#" class="login-required">Blog</a></li>
+          <li><a href="feedback.php" class="login-required">feedback</a></li>
+          <li><a href="about.php" class="login-required">about us</a></li>
           <li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li>
         </ul>
       </div>
