@@ -182,9 +182,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="footer-col">
                 <h3>Resources</h3>
                 <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Cooking Tips</a></li>
+                    <li><a href="feedback.php">feedback</a></li>
+                    <li><a href="about.php">about us</a></li>
+                    <li><a href="cookingtips.php">Cooking Tips</a></li>
                 </ul>
             </div>
             <div class="footer-col">
