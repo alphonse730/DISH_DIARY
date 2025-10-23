@@ -350,7 +350,7 @@
 				</div>
 				<div style="flex:1;min-width:220px;text-align:center;">
 					<i class="ri-book-open-line" style="font-size:3rem;color:#ff6b35;"></i>
-					<h3 style="margin-top:1rem;color:#4a3c00;">Create Recipe Books</h3>
+					<h3 style="margin-top:1rem;color:#4a3c00;">favorite recipe</h3>
 					<p>Save your favorite recipes and organize them into custom recipe books for easy access. Build collections for family dinners, festive occasions, or healthy eating.</p>
 				</div>
 				<div style="flex:1;min-width:220px;text-align:center;">
