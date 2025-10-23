@@ -435,7 +435,7 @@
     <div class="container">
         <h1 class="logo">🍽️ Dish Diary</h1>
         <p class="tagline">Your Personal Recipe Universe</p>
-        <a href="#" class="cta-button" id="startJourney">Start Your Journey</a>
+        <a href="user-admin.php" class="cta-button" id="startJourney">Start Your Journey</a>
     </div>
 
     <!-- Page transition overlay -->

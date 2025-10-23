@@ -24,6 +24,6 @@ header("Expires: Sat, 1 Jan 2000 00:00:00 GMT");
 header("Pragma: no-cache");
 
 // Redirect to login or home page
-header("Location: index.php");
+header("Location: user-admin.php");
 exit;
 ?>

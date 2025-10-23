@@ -393,7 +393,7 @@
 			</div>
 			<div style="margin-bottom:2.5rem;">
 				<h2 style="color:#ff6b35;text-align:center;margin-bottom:1rem;">Contact Us</h2>
-				<p style="font-size:1.13rem;color:#444;text-align:center;">Have questions, feedback, or partnership ideas? Reach out to us at <a href="mailto:info@dishdiary.com" style="color:#4ECDC4;text-decoration:underline;">info@dishdiary.com</a> or use our <a href="contact.php" style="color:#4ECDC4;text-decoration:underline;">Contact Page</a>.</p>
+				<p style="font-size:1.13rem;color:#444;text-align:center;">Have questions, feedback, or partnership ideas? Reach out to us at <a href="mailto:info@dishdiary.com" style="color:#4ECDC4;text-decoration:underline;">info@dishdiary.com</a> or use our <a href="feedback.php" style="color:#4ECDC4;text-decoration:underline;">feedback</a>.</p>
 			</div>
 		</section>
 	</main>
