@@ -442,8 +442,8 @@ function recipe_img_src($img) {
       <div class="footer-col">
         <h3>Resources</h3>
         <ul>
-          <li><a href="#" class="login-required">Help Center</a></li>
-          <li><a href="#" class="login-required">Blog</a></li>
+          <li><a href="feedback.php" class="login-required">Feedback</a></li>
+          <li><a href="about.php" class="login-required">About Us</a></li>
           <li><a href="cookingtips.php" class="login-required">Cooking Tips</a></li>
         </ul>
       </div>
